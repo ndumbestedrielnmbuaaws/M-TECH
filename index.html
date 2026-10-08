@@ -1,0 +1,731 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="M TECH INC builds software, deploys it on AWS and adds automation and AI for clients worldwide.">
+<title>M TECH INC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: single dark brand column, hex motif behind the hero, sections stacked as one long scroll with sticky nav */
+:root{
+  --navy:#0b1a2c; --navy-2:#10243b; --navy-3:#163150; --line:#21405f;
+  --ink:#eef4fa; --muted:#9db1c6; --cyan:#22c3e6; --cyan-ink:#04202b;
+  --ok:#3ccf91; --warn:#f2b84b;
+  --display:"Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
+  --body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --r:14px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{background:var(--navy);color:var(--ink);font:16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+a{color:var(--cyan)}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:20px}
+h1,h2,h3{font-family:var(--display);line-height:1.05;margin:0;text-wrap:balance}
+h2{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;letter-spacing:-.02em}
+h3{font-size:1.2rem;font-weight:700}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan)}
+.lede{color:var(--muted);max-width:62ch;font-size:1.05rem}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:6px}
+
+/* header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--navy) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:16px;padding-block:12px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.brand b{font-family:var(--display);font-size:1.35rem;font-weight:800;letter-spacing:-.01em}
+.brand small{font-family:var(--mono);font-size:.62rem;letter-spacing:.3em;color:var(--cyan)}
+nav{margin-left:auto;display:flex;gap:4px;align-items:center}
+nav a{color:var(--muted);text-decoration:none;font-weight:500;font-size:.95rem;padding:8px 12px;border-radius:999px}
+nav a:hover{color:var(--ink);background:var(--navy-2)}
+.menu-btn{display:none;margin-left:auto}
+@media (max-width:860px){
+  .menu-btn{display:inline-flex}
+  nav{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;background:var(--navy);border-bottom:1px solid var(--line);padding:8px 20px 16px}
+  nav.open{display:flex}
+  nav a{padding:12px}
+}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:600 1rem var(--body);border-radius:999px;padding:12px 22px;border:1px solid transparent;cursor:pointer;text-decoration:none;transition:transform .15s,background .15s}
+.btn-primary{background:var(--cyan);color:var(--cyan-ink)}
+.btn-primary:hover{transform:translateY(-1px);background:#4dd3f0}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--cyan)}
+.btn-sm{padding:8px 14px;font-size:.88rem}
+.btn[disabled]{opacity:.5;cursor:not-allowed;transform:none}
+
+/* hero */
+.hero{position:relative;overflow:hidden;padding-block:72px 64px}
+.hex-bg{position:absolute;right:-120px;top:-40px;width:620px;max-width:none;opacity:.55;pointer-events:none}
+.hero .eyebrow{display:block;margin-bottom:22px}
+.hero h1{font-size:clamp(3.2rem,11vw,7.4rem);font-weight:800;letter-spacing:-.045em;line-height:.92}
+.hero h1 span{display:block}
+.hero h1 span:nth-child(2){color:var(--cyan)}
+.hero .lede{margin-top:26px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.cred{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:40px;font-family:var(--mono);font-size:.78rem;color:var(--muted)}
+.cred span::before{content:"▸ ";color:var(--cyan)}
+
+/* sections */
+section{padding-block:72px;border-top:1px solid var(--line)}
+.sec-head{display:grid;gap:14px;margin-bottom:36px}
+
+/* services */
+.svc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px}
+@media (max-width:980px){.svc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.svc-grid{grid-template-columns:1fr}}
+.svc-group h3{font-family:var(--mono);font-size:.75rem;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.svc{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;padding:16px 0;border-bottom:1px solid var(--line)}
+.svc:first-of-type{border-top:1px solid var(--line)}
+.svc i{font-style:normal;font-family:var(--mono);color:var(--cyan);font-size:.8rem;padding-top:4px;grid-row:span 2}
+.svc strong{font-family:var(--display);font-size:1.2rem;font-weight:700}
+.svc p{color:var(--muted);font-size:.95rem}
+
+/* delivery pipeline */
+.pipeline{margin-top:48px;border:1px solid var(--line);border-radius:var(--r);padding:26px;background:var(--navy-2);display:grid;gap:22px}
+.pl-head{display:grid;gap:8px}
+.pl-head h3{font-size:1.6rem}
+.pl-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;counter-reset:s}
+@media (max-width:760px){.pl-steps{grid-template-columns:1fr 1fr}}
+@media (max-width:420px){.pl-steps{grid-template-columns:1fr}}
+.pl-steps li{counter-increment:s;position:relative;padding:16px;border-radius:10px;background:var(--navy);border:1px solid var(--line);display:grid;gap:4px}
+.pl-steps li::before{content:"0" counter(s);font-family:var(--mono);font-size:.72rem;color:var(--cyan)}
+.pl-steps b{font-family:var(--display);font-size:1.25rem}
+.pl-steps span{color:var(--muted);font-size:.9rem}
+
+/* campaign */
+.campaign{background:linear-gradient(160deg,var(--navy-2),var(--navy) 70%)}
+.camp-top{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px;align-items:end;margin-bottom:40px}
+@media (max-width:860px){.camp-top{grid-template-columns:1fr}}
+.tag{display:inline-block;font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;background:var(--cyan);color:var(--cyan-ink);padding:5px 10px;border-radius:6px;margin-bottom:18px}
+.offer{border:1px solid var(--cyan);border-radius:var(--r);padding:22px;background:color-mix(in srgb,var(--cyan) 8%,transparent)}
+.offer b{display:block;font-family:var(--display);font-size:1.6rem;line-height:1.1;margin-bottom:8px}
+.offer p{color:var(--muted);margin-bottom:16px}
+.pkgs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media (max-width:860px){.pkgs{grid-template-columns:1fr}}
+.pkg{background:var(--navy-2);border:1px solid var(--line);border-radius:var(--r);padding:24px;display:flex;flex-direction:column;gap:12px}
+.pkg .phase{font-family:var(--mono);font-size:.72rem;color:var(--cyan);letter-spacing:.16em;text-transform:uppercase}
+.pkg ul{margin:0;padding-left:18px;color:var(--muted);font-size:.94rem;display:grid;gap:4px}
+.pkg .dur{margin-top:auto;font-family:var(--mono);font-size:.78rem;color:var(--muted);padding-top:12px;border-top:1px dashed var(--line)}
+.pkg .btn{align-self:flex-start}
+
+/* jobs */
+.jobs-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:32px;align-items:start}
+@media (max-width:900px){.jobs-layout{grid-template-columns:1fr}}
+.job{width:100%;text-align:left;background:var(--navy-2);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;color:var(--ink);cursor:pointer;display:grid;gap:6px;font:inherit;transition:border-color .15s}
+.job+.job{margin-top:12px}
+.job:hover{border-color:var(--muted)}
+.job[aria-pressed="true"]{border-color:var(--cyan);background:var(--navy-3)}
+.job strong{font-family:var(--display);font-size:1.15rem}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--mono);font-size:.7rem;padding:3px 8px;border-radius:6px;background:var(--navy);border:1px solid var(--line);color:var(--muted)}
+.job p{color:var(--muted);font-size:.93rem}
+
+/* forms */
+.panel{background:var(--navy-2);border:1px solid var(--line);border-radius:var(--r);padding:26px}
+.panel h3{margin-bottom:4px}
+.panel .sub{color:var(--muted);font-size:.92rem;margin-bottom:20px}
+form{display:grid;gap:14px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:560px){.row{grid-template-columns:1fr}}
+label{display:grid;gap:6px;font-size:.85rem;font-weight:600;color:var(--muted)}
+input,select,textarea{font:inherit;font-size:1rem;color:var(--ink);background:var(--navy);border:1px solid var(--line);border-radius:10px;padding:11px 12px;width:100%;min-width:0}
+textarea{min-height:96px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--cyan)}
+.note{font-size:.82rem;color:var(--muted)}
+.msg{border-radius:10px;padding:14px 16px;font-size:.94rem;display:grid;gap:10px}
+.msg.ok{background:color-mix(in srgb,var(--ok) 14%,transparent);border:1px solid var(--ok)}
+.msg.alt{background:color-mix(in srgb,var(--warn) 12%,transparent);border:1px solid var(--warn)}
+.msg .acts{display:flex;flex-wrap:wrap;gap:8px}
+
+/* cv upload */
+.cvdrop{display:grid;gap:6px}
+.cvdrop>label:first-child{font-size:.85rem;font-weight:600;color:var(--muted)}
+.filebox{display:flex;align-items:center;gap:12px;border:1px dashed var(--muted);border-radius:10px;padding:14px;background:var(--navy);cursor:pointer;color:var(--ink);font-weight:500;font-size:.95rem;min-width:0}
+.filebox:hover,.filebox:focus-within{border-color:var(--cyan)}
+.filebox.has{border-style:solid;border-color:var(--ok)}
+.filebox input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.fb-ic{color:var(--cyan);display:flex}
+.fb-txt{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fb-clear{background:none;border:0;color:var(--muted);font-size:1rem;cursor:pointer;padding:4px 8px;border-radius:6px}
+.fb-clear:hover{color:var(--ink);background:var(--navy-2)}
+.opt{font-weight:400;opacity:.8}
+
+/* booking */
+.book-layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:32px;align-items:start}
+@media (max-width:900px){.book-layout{grid-template-columns:1fr}}
+.cal{background:var(--navy-2);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.cal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.cal-head b{font-family:var(--display);font-size:1.3rem;font-weight:700}
+.cal-nav{width:40px;height:40px;border-radius:999px;border:1px solid var(--line);background:var(--navy);color:var(--ink);font-size:1.2rem;cursor:pointer;display:grid;place-items:center}
+.cal-nav:hover:not([disabled]){border-color:var(--cyan)}
+.cal-nav[disabled]{opacity:.35;cursor:not-allowed}
+.cal-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.cal-wd{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:center;padding-bottom:4px}
+.cal-day{aspect-ratio:1/1;max-width:100%;border-radius:10px;border:1px solid transparent;background:var(--navy);color:var(--ink);font:600 1rem var(--body);font-variant-numeric:tabular-nums;cursor:pointer;display:grid;place-items:center;position:relative;padding:0}
+.cal-day:hover:not([disabled]){border-color:var(--cyan)}
+.cal-day[disabled]{background:transparent;color:var(--muted);opacity:.4;cursor:not-allowed}
+.cal-day.today::after{content:"";position:absolute;bottom:6px;width:5px;height:5px;border-radius:50%;background:var(--warn)}
+.cal-day[aria-pressed="true"]{background:var(--cyan);color:var(--cyan-ink);border-color:var(--cyan)}
+.cal-blank{aspect-ratio:1/1}
+.cal-legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px;font-size:.78rem;color:var(--muted)}
+.cal-legend span{display:inline-flex;align-items:center;gap:6px}
+.cal-legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.slots-title{margin-top:18px;font-family:var(--display);font-weight:700;font-size:1.05rem}
+.slots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:16px}
+.slot{padding:12px 0;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--ink);font:500 .95rem var(--mono);cursor:pointer;font-variant-numeric:tabular-nums}
+.slot:hover:not([disabled]){border-color:var(--cyan)}
+.slot[aria-pressed="true"]{background:var(--cyan);color:var(--cyan-ink);border-color:var(--cyan)}
+.slot[disabled]{text-decoration:line-through;opacity:.4;cursor:not-allowed}
+.picked{margin-top:18px;font-family:var(--mono);font-size:.85rem;color:var(--muted)}
+.picked b{color:var(--ink)}
+
+/* inbox (owner only) */
+.inbox-tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.tabbtn{font:600 .9rem var(--body);background:var(--navy-2);color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:8px 16px;cursor:pointer}
+.tabbtn[aria-selected="true"]{color:var(--cyan-ink);background:var(--cyan);border-color:var(--cyan)}
+.entries{display:grid;gap:10px}
+.entry{background:var(--navy-2);border:1px solid var(--line);border-left:4px solid var(--warn);border-radius:10px;padding:16px;display:grid;gap:6px;min-width:0}
+.entry.done{border-left-color:var(--ok)}
+.entry .top{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:baseline}
+.entry strong{font-family:var(--display);font-size:1.1rem}
+.entry .meta{font-family:var(--mono);font-size:.76rem;color:var(--muted);overflow-wrap:anywhere}
+.entry p{color:var(--muted);font-size:.93rem;overflow-wrap:anywhere}
+.empty{color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:24px;text-align:center}
+
+/* contact + footer */
+.contact-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media (max-width:760px){.contact-grid{grid-template-columns:1fr}}
+.ct{border:1px solid var(--line);border-radius:var(--r);padding:20px;display:grid;gap:8px;min-width:0}
+.ct .eyebrow{font-size:.68rem}
+.ct b{font-family:var(--display);font-size:1.25rem;overflow-wrap:anywhere;user-select:all}
+footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);font-size:.85rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--navy);padding:10px 18px;border-radius:999px;font-weight:600;font-size:.9rem;z-index:50}
+</style>
+
+</head>
+<body>
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="#top" aria-label="M TECH INC home">
+      <svg width="34" height="38" viewBox="0 0 34 38" aria-hidden="true"><path d="M17 2 31 10v18L17 36 3 28V10z" fill="none" stroke="var(--cyan)" stroke-width="2.6"/><path d="M10 26V13l7 8 7-8v13" fill="none" stroke="var(--ink)" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="17" cy="21" r="2.2" fill="var(--cyan)"/></svg>
+      <b>M TECH</b><small>INC</small>
+    </a>
+    <button class="btn btn-ghost btn-sm menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mainNav">Menu</button>
+    <nav id="mainNav">
+      <a href="#services">Services</a>
+      <a href="#campaign">AWS Consulting</a>
+      <a href="#careers">Careers</a>
+      <a href="#book">Book</a>
+      <a href="#contact">Contact</a>
+      <a href="#inbox" id="navInbox" hidden>Inbox</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <svg class="hex-bg" viewBox="0 0 600 640" aria-hidden="true">
+      <g fill="none" stroke="var(--navy-3)" stroke-width="22">
+        <path d="M300 30 560 180v280L300 610 40 460V180z"/>
+        <path d="M300 130 470 228v184L300 510 130 412V228z" stroke-width="14"/>
+      </g>
+    </svg>
+    <div class="wrap" style="position:relative">
+      <span class="eyebrow">AWS Cloud · Software · Deployment · AI &amp; Automation</span>
+      <h1><span>Build.</span><span>Automate.</span><span>Scale.</span></h1>
+      <p class="lede">We write the software and we deploy it. Websites, apps, custom software, automation and AI features, shipped to AWS and kept running, for clients all over the world, by a team led by a certified AWS Solutions Architect. Headquartered in Padova, Italy.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#book">Book a consultation</a>
+        <a class="btn btn-ghost" href="#campaign">Free AWS cloud assessment</a>
+      </div>
+      <div class="cred">
+        <span>AWS Certified Solutions Architect – Associate</span>
+        <span>Clients worldwide · remote-first</span>
+        <span>Broadcast &amp; telecom delivery</span>
+        <span>English · Italiano · Français</span>
+      </div>
+    </div>
+  </div>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">What we do</span>
+        <h2>Software, deployment and AI, one team.</h2>
+        <p class="lede">Every engineer here builds and deploys. The people who write your code also put it into production and keep it healthy, so nothing gets lost in a hand-over.</p>
+      </div>
+      <div class="svc-grid">
+        <div class="svc-group">
+          <h3>Cloud &amp; DevOps</h3>
+          <div class="svc"><i>01</i><strong>Cloud Migration</strong><p>Move servers, databases and apps to AWS with a tested cut-over plan and no surprise downtime.</p></div>
+          <div class="svc"><i>02</i><strong>Solutions Architecture</strong><p>Well-Architected designs for availability, security and cost, documented so your team can own them.</p></div>
+          <div class="svc"><i>03</i><strong>DevOps &amp; CI/CD</strong><p>Pipelines with GitHub Actions or CodePipeline: build, test and deploy on every merge.</p></div>
+          <div class="svc"><i>04</i><strong>Containers &amp; IaC</strong><p>Docker, ECS, EKS and Terraform or CloudFormation, so every environment is reproducible.</p></div>
+        </div>
+        <div class="svc-group">
+          <h3>Software Development</h3>
+          <div class="svc"><i>05</i><strong>Websites</strong><p>Fast, responsive company sites hosted on S3 and CloudFront, ready for search and mobile.</p></div>
+          <div class="svc"><i>06</i><strong>Web Apps</strong><p>Dashboards, portals and SaaS products built with React, Next.js, Node and Python.</p></div>
+          <div class="svc"><i>07</i><strong>Mobile Apps</strong><p>iOS and Android apps with secure cloud back ends and payment integrations.</p></div>
+          <div class="svc"><i>08</i><strong>Custom Software</strong><p>Broadcast tools, banking and loan systems, AI assistants: software shaped to how you work.</p></div>
+        </div>
+        <div class="svc-group">
+          <h3>Automation &amp; AI</h3>
+          <div class="svc"><i>09</i><strong>Workflow Automation</strong><p>Connect your apps and remove manual steps with AWS Lambda, Step Functions and scheduled jobs.</p></div>
+          <div class="svc"><i>10</i><strong>AI Enhancement</strong><p>Add AI to software you already have: smart search, summaries, translation and assistants, built on Amazon Bedrock or OpenAI.</p></div>
+          <div class="svc"><i>11</i><strong>AI Chat &amp; Phone Assistants</strong><p>Multilingual assistants that answer customers on your website, WhatsApp or phone, and send you a summary.</p></div>
+          <div class="svc"><i>12</i><strong>Document &amp; Data Automation</strong><p>Read invoices, forms and reports automatically and feed the data into your systems and dashboards.</p></div>
+        </div>
+      </div>
+      <div class="pipeline" aria-label="How every project is delivered">
+        <div class="pl-head"><span class="eyebrow">How we deliver</span><h3>Every project we build, we deploy.</h3></div>
+        <ol class="pl-steps">
+          <li><b>Build</b><span>Code in Git, reviewed on every pull request</span></li>
+          <li><b>Test</b><span>Automated tests run in the CI pipeline</span></li>
+          <li><b>Deploy</b><span>Docker images shipped to AWS with Terraform</span></li>
+          <li><b>Run</b><span>CloudWatch monitoring, backups and updates</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section id="campaign" class="campaign">
+    <div class="wrap">
+      <div class="camp-top">
+        <div class="sec-head" style="margin:0">
+          <span class="tag">Campaign · Autumn 2026</span>
+          <span class="eyebrow">AWS Cloud Consulting Group</span>
+          <h2>Your AWS bill and architecture, reviewed by a certified architect.</h2>
+          <p class="lede">For startups and companies anywhere in the world running on AWS, or planning to. We deploy to the AWS Region closest to your users. We check your workloads against the six Well-Architected pillars and hand you a prioritised action plan.</p>
+        </div>
+        <div class="offer">
+          <b>Free 30-minute cloud assessment</b>
+          <p>A video call with a walkthrough of your current setup and three concrete improvements you can make this month.</p>
+          <button class="btn btn-primary" data-book="AWS Cloud Assessment (free)">Claim your assessment</button>
+        </div>
+      </div>
+      <div class="pkgs">
+        <div class="pkg">
+          <span class="phase">Phase 1 · Assess</span>
+          <h3>Cloud Readiness Review</h3>
+          <ul><li>Inventory of servers, apps and data</li><li>Security and IAM baseline check</li><li>Migration strategy per workload (the 7 Rs)</li></ul>
+          <span class="dur">Typical duration · 1–2 weeks</span>
+          <button class="btn btn-ghost btn-sm" data-book="Cloud Readiness Review">Book this</button>
+        </div>
+        <div class="pkg">
+          <span class="phase">Phase 2 · Migrate</span>
+          <h3>Migration Sprint</h3>
+          <ul><li>Landing zone with multi-account setup</li><li>Infrastructure as Code from day one</li><li>CI/CD pipeline and rollback plan</li></ul>
+          <span class="dur">Typical duration · 3–6 weeks</span>
+          <button class="btn btn-ghost btn-sm" data-book="Migration Sprint">Book this</button>
+        </div>
+        <div class="pkg">
+          <span class="phase">Phase 3 · Optimise</span>
+          <h3>Cost &amp; Performance Tune-up</h3>
+          <ul><li>Rightsizing and Savings Plans review</li><li>Monitoring with CloudWatch alarms</li><li>Monthly report on spend and uptime</li></ul>
+          <span class="dur">Typical duration · ongoing, monthly</span>
+          <button class="btn btn-ghost btn-sm" data-book="Cost & Performance Tune-up">Book this</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="careers">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Careers</span>
+        <h2>Build with us.</h2>
+        <p class="lede">Everyone on the team writes software and deploys it, so every role here includes shipping to AWS. Remote from anywhere in the world, or hybrid from our Padova office. Pick a role and send your application below.</p>
+      </div>
+      <div class="jobs-layout">
+        <div id="jobList"></div>
+        <div class="panel">
+          <h3 id="applyTitle">Apply</h3>
+          <p class="sub" id="applySub">Choose a role on the left, or send an open application.</p>
+          <form id="applyForm" novalidate>
+            <label>Position
+              <select id="a_role" required></select>
+            </label>
+            <div class="row">
+              <label>Full name<input id="a_name" required autocomplete="name"></label>
+              <label>Email<input id="a_email" type="email" required autocomplete="email"></label>
+            </div>
+            <div class="row">
+              <label>Phone / WhatsApp<input id="a_phone" type="tel" autocomplete="tel"></label>
+              <label>Location<input id="a_loc" placeholder="City, country"></label>
+            </div>
+            <div class="cvdrop">
+              <label for="a_file">CV (PDF, max 10 MB)</label>
+              <label class="filebox" for="a_file">
+                <input id="a_file" type="file" accept="application/pdf,.pdf">
+                <span class="fb-ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 17v-6m-3 3 3-3 3 3"/></svg></span>
+                <span class="fb-txt" id="a_fileName">Choose your CV (PDF)</span>
+                <button type="button" class="fb-clear" id="a_fileClear" hidden aria-label="Remove file">✕</button>
+              </label>
+            </div>
+            <label>LinkedIn or portfolio link <span class="opt">(optional)</span><input id="a_cv" type="url" placeholder="https://"></label>
+            <label>Why this role?<textarea id="a_msg" placeholder="Tell us about a project you are proud of."></textarea></label>
+            <button class="btn btn-primary" type="submit">Submit application</button>
+            <div id="applyOut" hidden></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="book">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Appointments</span>
+        <h2>Book a consultation.</h2>
+        <p class="lede">Pick a day and time. Times are shown in your own time zone, with Italy time alongside. We confirm by email or WhatsApp within one working day.</p>
+      </div>
+      <div class="book-layout">
+        <div>
+          <div class="cal" id="cal">
+            <div class="cal-head">
+              <button type="button" class="cal-nav" id="calPrev" aria-label="Previous month">‹</button>
+              <b id="calTitle" aria-live="polite"></b>
+              <button type="button" class="cal-nav" id="calNext" aria-label="Next month">›</button>
+            </div>
+            <div class="cal-grid" id="calGrid" role="group" aria-label="Choose a day"></div>
+            <div class="cal-legend"><span><i style="background:var(--cyan)"></i>Selected</span><span><i style="background:var(--navy);border:1px solid var(--line)"></i>Available (Mon–Fri)</span><span><i style="background:var(--warn);border-radius:50%"></i>Today</span></div>
+          </div>
+          <div class="slots-title" id="slotsTitle"></div>
+          <div class="slots" id="slots" role="group" aria-label="Choose a time"></div>
+          <p class="picked" id="picked">No time selected yet.</p>
+        </div>
+        <div class="panel">
+          <h3>Your details</h3>
+          <p class="sub">30-minute session · video call or WhatsApp from anywhere, or in person in Padova.</p>
+          <form id="bookForm" novalidate>
+            <label>Service
+              <select id="b_service">
+                <option>AWS Cloud Assessment (free)</option>
+                <option>Cloud Readiness Review</option>
+                <option>Migration Sprint</option>
+                <option>Cost &amp; Performance Tune-up</option>
+                <option>DevOps &amp; CI/CD</option>
+                <option>Website</option>
+                <option>Web or Mobile App</option>
+                <option>Custom Software</option>
+                <option>Automation</option>
+                <option>AI Enhancement</option>
+              </select>
+            </label>
+            <div class="row">
+              <label>Full name<input id="b_name" required autocomplete="name"></label>
+              <label>Company<input id="b_company" autocomplete="organization"></label>
+            </div>
+            <div class="row">
+              <label>Email<input id="b_email" type="email" required autocomplete="email"></label>
+              <label>Phone / WhatsApp<input id="b_phone" type="tel" autocomplete="tel"></label>
+            </div>
+            <label>Meeting type
+              <select id="b_mode"><option>Video call</option><option>WhatsApp call</option><option>In person (Padova)</option></select>
+            </label>
+            <label>What would you like to discuss?<textarea id="b_msg"></textarea></label>
+            <button class="btn btn-primary" type="submit">Request appointment</button>
+            <div id="bookOut" hidden></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="inbox" hidden>
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Owner view · only you see this</span>
+        <h2>Inbox</h2>
+        <p class="lede">Applications and appointment requests submitted through this page.</p>
+      </div>
+      <div class="inbox-tabs" role="tablist">
+        <button class="tabbtn" role="tab" aria-selected="true" data-tab="bookings">Bookings <span id="cntB">0</span></button>
+        <button class="tabbtn" role="tab" aria-selected="false" data-tab="applications">Applications <span id="cntA">0</span></button>
+      </div>
+      <div class="entries" id="entries"><div class="empty">Requests will appear here as people submit them.</div></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Contact</span>
+        <h2>Talk to us directly.</h2>
+      </div>
+      <div class="contact-grid">
+        <div class="ct"><span class="eyebrow">WhatsApp</span><b id="ctWa">+39 329 797 9359</b><div><a class="btn btn-ghost btn-sm" href="https://wa.me/393297979359" target="_blank" rel="noopener">Open WhatsApp</a> <button class="btn btn-ghost btn-sm" data-copy="+39 329 797 9359">Copy</button></div></div>
+        <div class="ct"><span class="eyebrow">Email</span><b>stedrieln@gmail.com</b><div><button class="btn btn-ghost btn-sm" data-copy="stedrieln@gmail.com">Copy</button></div></div>
+        <div class="ct"><span class="eyebrow">Office</span><b>Vigonovo · Padova</b><p class="note">Veneto, Italy · headquarters. Serving clients worldwide, remotely.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 M TECH INC · NSM Software Development</span>
+    <span>Build. Automate. Scale.</span>
+  </div>
+</footer>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const WA = "393297979359";
+const JOBS = [
+  {id:"devops", title:"Junior DevOps Engineer", tags:["AWS","Terraform","CI/CD","Remote or Padova"], text:"Help build pipelines and infrastructure for client projects. Linux basics and some AWS experience expected."},
+  {id:"fullstack", title:"Full-Stack Developer", tags:["React","Node.js","PostgreSQL","Remote · Worldwide"], text:"Ship web apps and dashboards end to end, from API design to UI."},
+  {id:"mobile", title:"Mobile App Developer", tags:["React Native","Flutter","Remote · Worldwide"], text:"Build iOS and Android apps with secure cloud back ends."},
+  {id:"ai", title:"AI & Automation Engineer", tags:["Python","LLMs","AWS Bedrock","Remote · Worldwide"], text:"Build automations and add AI features to client software, then deploy them to AWS."},
+  {id:"intern", title:"Cloud Support Intern", tags:["AWS","Internship","Remote or Padova"], text:"Learn AWS on real projects. Ideal for students in IT, engineering or computer science."}
+];
+const SLOT_TIMES = ["09:00","10:00","11:00","14:00","15:00","16:00"];
+const $ = s => document.querySelector(s);
+let db = null, canWrite = true, takenSlots = new Set();
+
+function toast(t){const el=$("#toast");el.textContent=t;el.hidden=false;clearTimeout(toast._t);toast._t=setTimeout(()=>el.hidden=true,2400)}
+async function copyText(t){try{await navigator.clipboard.writeText(t);toast("Copied")}catch(e){toast("Select the text and copy it manually")}}
+document.addEventListener("click",e=>{const c=e.target.closest("[data-copy]");if(c)copyText(c.dataset.copy)});
+
+/* menu */
+$("#menuBtn").addEventListener("click",()=>{const n=$("#mainNav");const o=n.classList.toggle("open");$("#menuBtn").setAttribute("aria-expanded",o)});
+$("#mainNav").addEventListener("click",e=>{if(e.target.tagName==="A"){$("#mainNav").classList.remove("open");$("#menuBtn").setAttribute("aria-expanded","false")}});
+
+/* jobs */
+let selJob = JOBS[0].id;
+function renderJobs(){
+  $("#jobList").innerHTML="";
+  JOBS.forEach(j=>{
+    const b=document.createElement("button");b.type="button";b.className="job";b.setAttribute("aria-pressed",j.id===selJob);
+    b.innerHTML=`<strong></strong><div class="chips"></div><p></p>`;
+    b.querySelector("strong").textContent=j.title;b.querySelector("p").textContent=j.text;
+    j.tags.forEach(t=>{const c=document.createElement("span");c.className="chip";c.textContent=t;b.querySelector(".chips").append(c)});
+    b.onclick=()=>{selJob=j.id;$("#a_role").value=j.title;syncApply();renderJobs()};
+    $("#jobList").append(b);
+  });
+}
+const roleSel=$("#a_role");
+[...JOBS.map(j=>j.title),"Open application"].forEach(t=>{const o=document.createElement("option");o.textContent=t;roleSel.append(o)});
+roleSel.onchange=()=>{const j=JOBS.find(x=>x.title===roleSel.value);selJob=j?j.id:null;syncApply();renderJobs()};
+function syncApply(){$("#applyTitle").textContent="Apply · "+roleSel.value}
+renderJobs();syncApply();
+
+/* booking calendar */
+const fmtDay=new Intl.DateTimeFormat("en-GB",{weekday:"short",timeZone:"Europe/Rome"});
+const fmtNum=new Intl.DateTimeFormat("en-GB",{day:"numeric",timeZone:"Europe/Rome"});
+const fmtLong=new Intl.DateTimeFormat("en-GB",{weekday:"long",day:"numeric",month:"long",timeZone:"Europe/Rome"});
+const isoRome=d=>new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/Rome"}).format(d);
+const userTz=(()=>{try{return Intl.DateTimeFormat().resolvedOptions().timeZone||"Europe/Rome"}catch(e){return "Europe/Rome"}})();
+const sameTz=(()=>{const n=new Date();const f=tz=>new Intl.DateTimeFormat("en-GB",{timeZone:tz,hour:"2-digit",minute:"2-digit",day:"2-digit"}).format(n);try{return f(userTz)===f("Europe/Rome")}catch(e){return true}})();
+/* the real moment a Rome wall-clock slot happens */
+function romeInstant(d,t){const [y,m,dd]=isoRome(d).split("-").map(Number);const [h,mi]=t.split(":").map(Number);
+  let guess=Date.UTC(y,m-1,dd,h,mi);
+  for(let i=0;i<2;i++){const p=Object.fromEntries(new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Rome",hourCycle:"h23",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit"}).formatToParts(new Date(guess)).map(x=>[x.type,x.value]));
+    const asUTC=Date.UTC(+p.year,+p.month-1,+p.day,+p.hour,+p.minute);guess+=Date.UTC(y,m-1,dd,h,mi)-asUTC}
+  return new Date(guess)}
+const fmtLocal=new Intl.DateTimeFormat("en-GB",{hour:"2-digit",minute:"2-digit",hourCycle:"h23"});
+const fmtLocalLong=new Intl.DateTimeFormat("en-GB",{weekday:"short",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit",hourCycle:"h23",timeZoneName:"short"});
+function whenText(d,t){const base=`${fmtLong.format(d)} at ${t} Italy time`;return sameTz?base:`${base} (${fmtLocalLong.format(romeInstant(d,t))} your time)`}
+/* calendar (dates are Italy dates; a day is represented at 12:00 UTC so it is the same date everywhere) */
+const BOOK_AHEAD_DAYS=90;
+const dayAt=(y,m,d)=>new Date(Date.UTC(y,m,d,12));
+const todayIso=isoRome(new Date());
+const [ty,tm,td]=todayIso.split("-").map(Number);
+const firstBookable=dayAt(ty,tm-1,td+1), lastBookable=dayAt(ty,tm-1,td+BOOK_AHEAD_DAYS);
+const isWeekday=d=>{const w=d.getUTCDay();return w!==0&&w!==6};
+function isFull(d){return SLOT_TIMES.every(t=>takenSlots.has(slotId(d,t)))}
+function bookable(d){return d>=firstBookable&&d<=lastBookable&&isWeekday(d)&&!isFull(d)}
+let selDay=(()=>{let d=firstBookable;while(!isWeekday(d))d=dayAt(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate()+1);return d})();
+let selTime=null, viewY=selDay.getUTCFullYear(), viewM=selDay.getUTCMonth();
+const fmtMonth=new Intl.DateTimeFormat("en-GB",{month:"long",year:"numeric",timeZone:"UTC"});
+const fmtDayLong=new Intl.DateTimeFormat("en-GB",{weekday:"long",day:"numeric",month:"long",timeZone:"UTC"});
+function slotId(d,t){return isoRome(d)+"_"+t.replace(":","")}
+function renderDays(){
+  $("#calTitle").textContent=fmtMonth.format(dayAt(viewY,viewM,1));
+  $("#calPrev").disabled=dayAt(viewY,viewM,0)<firstBookable;
+  $("#calNext").disabled=dayAt(viewY,viewM+1,1)>lastBookable;
+  const g=$("#calGrid");g.innerHTML="";
+  ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"].forEach(w=>{const e=document.createElement("div");e.className="cal-wd";e.textContent=w;g.append(e)});
+  const lead=(dayAt(viewY,viewM,1).getUTCDay()+6)%7, count=dayAt(viewY,viewM+1,0).getUTCDate();
+  for(let i=0;i<lead;i++){const e=document.createElement("div");e.className="cal-blank";g.append(e)}
+  for(let n=1;n<=count;n++){
+    const d=dayAt(viewY,viewM,n), iso=isoRome(d);
+    const b=document.createElement("button");b.type="button";b.className="cal-day"+(iso===todayIso?" today":"");b.textContent=n;
+    const ok=bookable(d);b.disabled=!ok;
+    b.setAttribute("aria-label",fmtDayLong.format(d)+(ok?"":(isFull(d)&&isWeekday(d)?", fully booked":", unavailable")));
+    b.setAttribute("aria-pressed",iso===isoRome(selDay));
+    b.onclick=()=>{selDay=d;selTime=null;renderDays();renderSlots()};
+    g.append(b);
+  }
+}
+$("#calPrev").onclick=()=>{viewM--;if(viewM<0){viewM=11;viewY--}renderDays()};
+$("#calNext").onclick=()=>{viewM++;if(viewM>11){viewM=0;viewY++}renderDays()};
+function renderSlots(){
+  const box=$("#slots");box.innerHTML="";
+  SLOT_TIMES.forEach(t=>{const b=document.createElement("button");b.type="button";b.className="slot";b.textContent=sameTz?t:fmtLocal.format(romeInstant(selDay,t));b.title=t+" Italy time";
+    const taken=takenSlots.has(slotId(selDay,t));b.disabled=taken;if(taken)b.setAttribute("aria-label",t+" booked");
+    b.setAttribute("aria-pressed",t===selTime);b.onclick=()=>{selTime=t;renderSlots()};box.append(b)});
+  $("#slotsTitle").textContent="Times on "+fmtDayLong.format(selDay)+(sameTz?"":" · shown in your time");
+  $("#picked").innerHTML=selTime?`Selected: <b></b>`:"No time selected yet.";
+  if(selTime)$("#picked b").textContent=whenText(selDay,selTime);
+}
+renderDays();renderSlots();
+document.querySelectorAll("[data-book]").forEach(b=>b.addEventListener("click",()=>{$("#b_service").value=b.dataset.book;document.getElementById("book").scrollIntoView();setTimeout(()=>$("#b_name").focus({preventScroll:true}),400)}));
+
+/* submission helpers */
+function waLink(text){return "https://wa.me/"+WA+"?text="+encodeURIComponent(text)}
+function showOut(el,kind,html,text){
+  el.hidden=false;el.className="msg "+kind;el.innerHTML=html;
+  if(text){const acts=document.createElement("div");acts.className="acts";
+    const a=document.createElement("a");a.className="btn btn-primary btn-sm";a.href=waLink(text);a.target="_blank";a.rel="noopener";a.textContent="Send via WhatsApp";
+    const c=document.createElement("button");c.type="button";c.className="btn btn-ghost btn-sm";c.textContent="Copy details";c.onclick=()=>copyText(text);
+    acts.append(a,c);el.append(acts)}
+}
+function need(ids){for(const id of ids){const el=document.getElementById(id);if(!el.value.trim()){el.focus();return false}}return true}
+const emailOk=v=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+
+let uid=null;
+/* each submitter keeps their own requests in one private doc (col/<their id>); only the owner can read across them */
+async function save(col,id,data){
+  if(!db||!canWrite||!uid)return false;
+  try{
+    const ref=db.doc(col+"/"+uid);const snap=await ref.get();
+    const items=snap.exists?[...(snap.data().items||[])]:[];
+    items.push({id,...data});await ref.set({items});return true;
+  }catch(e){if(e&&e.code==="invalid_argument")canWrite=false;return false}
+}
+async function saveSlot(sid){if(!db||!canWrite)return;try{await db.collection("slots").doc(sid).set({taken:true})}catch(e){}}
+
+/* CV file */
+let cvFile=null;
+const fileIn=$("#a_file"), fileName=$("#a_fileName"), fileClear=$("#a_fileClear");
+function setCv(f){
+  cvFile=f||null;const box=fileIn.closest(".filebox");
+  if(cvFile){fileName.textContent=`${cvFile.name} · ${(cvFile.size/1048576).toFixed(1)} MB`;box.classList.add("has");fileClear.hidden=false}
+  else{fileName.textContent="Choose your CV (PDF)";box.classList.remove("has");fileClear.hidden=true;fileIn.value=""}
+}
+fileIn.addEventListener("change",()=>{
+  const f=fileIn.files&&fileIn.files[0];const out=$("#applyOut");
+  if(!f){setCv(null);return}
+  const isPdf=f.type==="application/pdf"||/\.pdf$/i.test(f.name);
+  if(!isPdf){setCv(null);showOut(out,"alt","Your CV must be a PDF file. Save it as PDF and choose it again.");return}
+  if(f.size>10*1048576){setCv(null);showOut(out,"alt","Your PDF is larger than 10 MB. Compress it or export a smaller version and try again.");return}
+  out.hidden=true;setCv(f);
+});
+fileClear.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();setCv(null)});
+
+function canShareFile(f){try{return !!(f&&navigator.canShare&&navigator.share&&navigator.canShare({files:[f]}))}catch(e){return false}}
+
+function showCvStep(out,saved,text,d){
+  out.hidden=false;out.className="msg "+(saved?"ok":"alt");out.innerHTML="";
+  const p=document.createElement("div");
+  const shareable=canShareFile(cvFile);
+  p.innerHTML=(saved?"<b>Details received.</b> ":"<b>One last step:</b> ")+(shareable
+    ?"Tap the button below and choose <b>WhatsApp</b> (or your email app) to send us your CV with your details."
+    :"Open WhatsApp below and attach your PDF in the chat (tap the paperclip), or email it to <b>stedrieln@gmail.com</b>.");
+  out.append(p);
+  const acts=document.createElement("div");acts.className="acts";
+  if(shareable){
+    const b=document.createElement("button");b.type="button";b.className="btn btn-primary btn-sm";b.textContent="Send CV and details";
+    b.onclick=async()=>{try{await navigator.share({files:[cvFile],title:"Job application – "+d.role,text});
+        out.className="msg ok";p.innerHTML="<b>Thank you.</b> We will reply to "+escapeHtml(d.email)+" within a few working days.";acts.remove();$("#applyForm").reset();setCv(null);roleSel.value=d.role}
+      catch(err){if(err&&err.name==="AbortError")return;toast("Sharing failed. Use WhatsApp or email instead.")}};
+    acts.append(b);
+  }
+  const a=document.createElement("a");a.className="btn "+(shareable?"btn-ghost":"btn-primary")+" btn-sm";a.target="_blank";a.rel="noopener";
+  a.href=waLink(text+"\n\n(I will attach my CV PDF here: "+cvFile.name+")");a.textContent="Open WhatsApp";
+  const c=document.createElement("button");c.type="button";c.className="btn btn-ghost btn-sm";c.textContent="Copy email address";c.onclick=()=>copyText("stedrieln@gmail.com");
+  acts.append(a,c);out.append(acts);
+}
+
+$("#applyForm").addEventListener("submit",async e=>{
+  e.preventDefault();const out=$("#applyOut");
+  if(!need(["a_name","a_email"]))return;
+  if(!emailOk($("#a_email").value)){$("#a_email").focus();showOut(out,"alt","Enter a valid email address, for example name@company.com.");return}
+  if(!cvFile&&!$("#a_cv").value.trim()){fileIn.closest(".filebox").focus?.();showOut(out,"alt","Add your CV as a PDF, or paste a LinkedIn or portfolio link.");return}
+  const d={role:roleSel.value,name:$("#a_name").value.trim(),email:$("#a_email").value.trim(),phone:$("#a_phone").value.trim(),location:$("#a_loc").value.trim(),cv:$("#a_cv").value.trim(),cvFile:cvFile?cvFile.name:"",message:$("#a_msg").value.trim(),createdAt:new Date().toISOString(),status:"new"};
+  const text=`Job application – M TECH INC\nPosition: ${d.role}\nName: ${d.name}\nEmail: ${d.email}\nPhone: ${d.phone}\nLocation: ${d.location}`+(d.cv?`\nLinkedIn/portfolio: ${d.cv}`:"")+(d.cvFile?`\nCV: ${d.cvFile} (PDF attached)`:"")+`\n\n${d.message}`;
+  const btn=e.submitter;btn.disabled=true;
+  const ok=await save("applications","a"+Date.now()+Math.random().toString(36).slice(2,6),d);
+  btn.disabled=false;
+  if(cvFile){showCvStep(out,ok,text,d);return}
+  if(ok){showOut(out,"ok","<b>Application received.</b> We will reply to "+escapeHtml(d.email)+" within a few working days.");e.target.reset();roleSel.value=d.role}
+  else showOut(out,"alt","<b>One last step:</b> send your application to us on WhatsApp, or copy it and email it to stedrieln@gmail.com.",text);
+});
+
+$("#bookForm").addEventListener("submit",async e=>{
+  e.preventDefault();const out=$("#bookOut");
+  if(!selTime){showOut(out,"alt","Choose a day and a time on the calendar first.");document.getElementById("slots").scrollIntoView({block:"center"});return}
+  if(!need(["b_name","b_email"]))return;
+  if(!emailOk($("#b_email").value)){$("#b_email").focus();showOut(out,"alt","Enter a valid email address, for example name@company.com.");return}
+  const sid=slotId(selDay,selTime), when=whenText(selDay,selTime);
+  const d={service:$("#b_service").value,name:$("#b_name").value.trim(),company:$("#b_company").value.trim(),email:$("#b_email").value.trim(),phone:$("#b_phone").value.trim(),mode:$("#b_mode").value,message:$("#b_msg").value.trim(),date:isoRome(selDay),time:selTime,slot:sid,clientTz:userTz,createdAt:new Date().toISOString(),status:"new"};
+  const text=`Appointment request – M TECH INC\nService: ${d.service}\nWhen: ${when}\nMeeting: ${d.mode}\nName: ${d.name}\nCompany: ${d.company}\nEmail: ${d.email}\nPhone: ${d.phone}\n\n${d.message}`;
+  const btn=e.submitter;btn.disabled=true;
+  let ok=await save("bookings","b"+Date.now()+Math.random().toString(36).slice(2,6),d);
+  if(ok)await saveSlot(sid);
+  btn.disabled=false;
+  if(ok){showOut(out,"ok",`<b>Request sent for ${escapeHtml(when)}.</b> We will confirm by email or WhatsApp within one working day.`);takenSlots.add(sid);selTime=null;renderDays();renderSlots();e.target.reset()}
+  else showOut(out,"alt",`<b>One last step:</b> send this request for ${escapeHtml(when)} on WhatsApp to confirm it, or copy it and email stedrieln@gmail.com.`,text);
+});
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+
+/* owner inbox */
+let inboxTab="bookings", data={bookings:[],applications:[]};
+function renderInbox(){
+  $("#cntB").textContent=data.bookings.filter(x=>x.d.status!=="done").length;
+  $("#cntA").textContent=data.applications.filter(x=>x.d.status!=="done").length;
+  const box=$("#entries");box.innerHTML="";const list=data[inboxTab];
+  if(!list.length){box.innerHTML=`<div class="empty">No ${inboxTab} yet. They appear here as soon as someone submits the form.</div>`;return}
+  list.forEach(({docId,id,d})=>{
+    const el=document.createElement("div");el.className="entry"+(d.status==="done"?" done":"");
+    const title=inboxTab==="bookings"?`${d.name}${d.company?" · "+d.company:""}`:d.name;
+    const meta=inboxTab==="bookings"?`${d.service} · ${d.date} ${d.time} Italy · ${d.mode}${d.clientTz?" · client in "+d.clientTz:""}`:`${d.role} · ${d.location||"—"}`;
+    el.innerHTML=`<div class="top"><strong></strong><span class="meta s"></span></div><span class="meta m"></span><span class="meta c"></span><p></p><div class="acts" style="display:flex;gap:8px;flex-wrap:wrap"></div>`;
+    el.querySelector("strong").textContent=title;el.querySelector(".s").textContent=d.status==="done"?"Handled":"New";
+    el.querySelector(".m").textContent=meta;el.querySelector(".c").textContent=[d.email,d.phone,d.cv,d.cvFile?"CV PDF: "+d.cvFile+" (sent by WhatsApp/email)":""].filter(Boolean).join(" · ");
+    el.querySelector("p").textContent=d.message||"";
+    const acts=el.querySelector(".acts");
+    const t=document.createElement("button");t.className="btn btn-ghost btn-sm";t.textContent=d.status==="done"?"Mark as new":"Mark handled";
+    const col=inboxTab;
+    t.onclick=async()=>{t.disabled=true;try{
+      const ref=db.doc(col+"/"+docId);const snap=await ref.get();
+      const items=(snap.data()?.items||[]).map(x=>x.id===id?{...x,status:x.status==="done"?"new":"done"}:x);
+      await ref.set({items});
+    }catch(e){toast("Could not update. Try again.")}t.disabled=false};
+    acts.append(t);
+    if(d.phone){const w=document.createElement("a");w.className="btn btn-ghost btn-sm";w.target="_blank";w.rel="noopener";w.textContent="WhatsApp";w.href="https://wa.me/"+d.phone.replace(/\D/g,"");acts.append(w)}
+    box.append(el);
+  });
+}
+document.querySelectorAll(".tabbtn").forEach(b=>b.onclick=()=>{inboxTab=b.dataset.tab;document.querySelectorAll(".tabbtn").forEach(x=>x.setAttribute("aria-selected",x===b));renderInbox()});
+
+/* runtime */
+(async()=>{
+  if(!window.claude||!claude.use)return;
+  const [dbNs,user]=await Promise.all([claude.use("db"),claude.use("user")]);
+  db=dbNs;if(!db)return;
+  uid=user?await user.id():null;
+  db.collection("slots").onSnapshot(s=>{takenSlots=new Set(s.docs.filter(x=>x.exists).map(x=>x.id));renderDays();renderSlots()},()=>{});
+  const owner=user?(await user.isOwner()||await user.canEdit()):false;
+  if(owner){
+    $("#inbox").hidden=false;$("#navInbox").hidden=false;
+    ["bookings","applications"].forEach(col=>db.collection(col).onSnapshot(s=>{
+      const rows=[];s.docs.forEach(x=>{if(!x.exists)return;(x.data().items||[]).forEach(it=>rows.push({docId:x.id,id:it.id,d:it}))});
+      rows.sort((a,b)=>String(b.d.createdAt).localeCompare(String(a.d.createdAt)));
+      data[col]=rows;renderInbox()},()=>{}));
+  }
+})();
+</script>
+
+</body>
+</html>
