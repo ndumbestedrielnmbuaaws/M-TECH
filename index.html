@@ -1,0 +1,1336 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><title>M TECH INC</title></head><body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: single dark brand column, hex motif behind the hero, sections stacked as one long scroll with sticky nav */
+:root{
+  --navy:#0b1a2c; --navy-2:#10243b; --navy-3:#163150; --line:#21405f;
+  --ink:#eef4fa; --muted:#9db1c6; --cyan:#22c3e6; --cyan-ink:#04202b;
+  --ok:#3ccf91; --warn:#f2b84b;
+  --display:"Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
+  --body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --r:14px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{background:var(--navy);color:var(--ink);font:16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+a{color:var(--cyan)}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:20px}
+h1,h2,h3{font-family:var(--display);line-height:1.05;margin:0;text-wrap:balance}
+h2{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;letter-spacing:-.02em}
+h3{font-size:1.2rem;font-weight:700}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan)}
+.lede{color:var(--muted);max-width:62ch;font-size:1.05rem}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:6px}
+
+/* header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--navy) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:16px;padding-block:12px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.brand b{font-family:var(--display);font-size:1.35rem;font-weight:800;letter-spacing:-.01em}
+.brand small{font-family:var(--mono);font-size:.62rem;letter-spacing:.3em;color:var(--cyan)}
+nav{margin-left:auto;display:flex;gap:4px;align-items:center}
+nav a{color:var(--muted);text-decoration:none;font-weight:500;font-size:.95rem;padding:8px 12px;border-radius:999px}
+nav a:hover{color:var(--ink);background:var(--navy-2)}
+nav a.nav-remote{display:inline-flex;align-items:center;gap:6px;background:var(--cyan);color:var(--cyan-ink);font-weight:700}
+nav a.nav-remote:hover{background:#4dd3f0;color:var(--cyan-ink)}
+.bar .menu-btn{display:none;margin-left:auto}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px;margin-left:8px;flex:none}
+.lang button{font:600 .8rem var(--mono);letter-spacing:.06em;background:transparent;color:var(--muted);border:0;border-radius:999px;padding:6px 10px;cursor:pointer;min-width:38px}
+.lang button[aria-pressed="true"]{background:var(--cyan);color:var(--cyan-ink)}
+.brand b{white-space:nowrap}
+@media (max-width:440px){.brand small{display:none}.bar{gap:10px}.lang button{padding:6px 8px;min-width:34px}}
+@media (min-width:1161px){nav{gap:2px}nav a{padding:8px}}
+@media (max-width:1160px){
+  .bar .menu-btn{display:inline-flex}
+  nav{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;background:var(--navy);border-bottom:1px solid var(--line);padding:8px 20px 16px}
+  nav.open{display:flex}
+  nav a{padding:12px}
+}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:600 1rem var(--body);border-radius:999px;padding:12px 22px;border:1px solid transparent;cursor:pointer;text-decoration:none;transition:transform .15s,background .15s}
+.btn-primary{background:var(--cyan);color:var(--cyan-ink)}
+.btn-primary:hover{transform:translateY(-1px);background:#4dd3f0}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--cyan)}
+.btn-sm{padding:8px 14px;font-size:.88rem}
+.btn[disabled]{opacity:.5;cursor:not-allowed;transform:none}
+
+/* hero */
+.hero{position:relative;overflow:hidden;padding-block:72px 64px}
+.hex-bg{position:absolute;right:-120px;top:-40px;width:620px;max-width:none;opacity:.55;pointer-events:none}
+.hero .eyebrow{display:block;margin-bottom:22px}
+.hero h1{font-size:clamp(3.2rem,11vw,7.4rem);font-weight:800;letter-spacing:-.045em;line-height:.92}
+.hero h1 span{display:block}
+.hero h1 span:nth-child(2){color:var(--cyan)}
+.hero .lede{margin-top:26px}
+.hero-dl{margin:0 0 34px;border:1px solid var(--line);border-radius:18px;padding:20px;background:rgba(15,32,56,.82);backdrop-filter:blur(6px);display:grid;gap:12px;max-width:420px}
+.hero-dl h2{font-size:1.05rem;margin:0 0 2px}
+.hd-group{display:grid;gap:6px}
+.hd-group>span{font:500 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.hd-group{grid-template-columns:repeat(2,minmax(0,1fr))}
+.hd-group>span{grid-column:1/-1}
+.hd{display:block;text-align:center;padding:9px 10px;border-radius:10px;border:1px solid var(--line);color:var(--ink);text-decoration:none;font:600 .85rem var(--display);background:var(--navy)}
+.hd:hover{border-color:var(--cyan)}
+.hd-pri{background:var(--cyan);border-color:var(--cyan);color:var(--cyan-ink)}
+.hd-group:has(> .hd:only-of-type){grid-template-columns:1fr}
+.hero-side{display:grid;gap:16px;align-items:start;margin:0 0 34px;max-width:420px}
+.hero-side .hero-dl{margin:0}
+@media (min-width:720px) and (max-width:1099px){.hero-side{grid-template-columns:repeat(2,minmax(0,1fr));max-width:none}}
+@media (min-width:1100px){.hero>.wrap{display:flow-root}.hero-side{float:right;width:330px;max-width:none;margin:0 0 24px 40px}}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.appdl{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:22px;padding:12px 14px;border:1px solid var(--line);border-radius:var(--r);background:color-mix(in srgb,var(--navy-2) 80%,transparent);max-width:max-content}
+.appdl-t{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-right:6px}
+.appdl-t svg{color:var(--cyan)}
+.cred{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:40px;font-family:var(--mono);font-size:.78rem;color:var(--muted)}
+.cred span::before{content:"▸ ";color:var(--cyan)}
+
+/* sections */
+section{padding-block:72px;border-top:1px solid var(--line)}
+.sec-head{display:grid;gap:14px;margin-bottom:36px}
+
+/* services */
+.svc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px}
+@media (max-width:980px){.svc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.svc-grid{grid-template-columns:1fr}}
+.svc-group h3{font-family:var(--mono);font-size:.75rem;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.svc{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;padding:16px 0;border-bottom:1px solid var(--line)}
+.svc:first-of-type{border-top:1px solid var(--line)}
+.svc i{font-style:normal;font-family:var(--mono);color:var(--cyan);font-size:.8rem;padding-top:4px;grid-row:span 2}
+.svc strong{font-family:var(--display);font-size:1.2rem;font-weight:700}
+.svc p{color:var(--muted);font-size:.95rem}
+
+/* delivery pipeline */
+.pipeline{margin-top:48px;border:1px solid var(--line);border-radius:var(--r);padding:26px;background:var(--navy-2);display:grid;gap:22px}
+.pl-head{display:grid;gap:8px}
+.pl-head h3{font-size:1.6rem}
+.pl-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;counter-reset:s}
+@media (max-width:760px){.pl-steps{grid-template-columns:1fr 1fr}}
+@media (max-width:420px){.pl-steps{grid-template-columns:1fr}}
+.pl-steps li{counter-increment:s;position:relative;padding:16px;border-radius:10px;background:var(--navy);border:1px solid var(--line);display:grid;gap:4px}
+.pl-steps li::before{content:"0" counter(s);font-family:var(--mono);font-size:.72rem;color:var(--cyan)}
+.pl-steps b{font-family:var(--display);font-size:1.25rem}
+.pl-steps span{color:var(--muted);font-size:.9rem}
+
+/* campaign */
+.campaign{background:linear-gradient(160deg,var(--navy-2),var(--navy) 70%)}
+.camp-top{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px;align-items:end;margin-bottom:40px}
+@media (max-width:860px){.camp-top{grid-template-columns:1fr}}
+.tag{display:inline-block;font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;background:var(--cyan);color:var(--cyan-ink);padding:5px 10px;border-radius:6px;margin-bottom:18px}
+.offer{border:1px solid var(--cyan);border-radius:var(--r);padding:22px;background:color-mix(in srgb,var(--cyan) 8%,transparent)}
+.offer b{display:block;font-family:var(--display);font-size:1.6rem;line-height:1.1;margin-bottom:8px}
+.offer p{color:var(--muted);margin-bottom:16px}
+.pkgs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media (max-width:860px){.pkgs{grid-template-columns:1fr}}
+.pkg{background:var(--navy-2);border:1px solid var(--line);border-radius:var(--r);padding:24px;display:flex;flex-direction:column;gap:12px}
+.pkg .phase{font-family:var(--mono);font-size:.72rem;color:var(--cyan);letter-spacing:.16em;text-transform:uppercase}
+.pkg ul{margin:0;padding-left:18px;color:var(--muted);font-size:.94rem;display:grid;gap:4px}
+.pkg .dur{margin-top:auto;font-family:var(--mono);font-size:.78rem;color:var(--muted);padding-top:12px;border-top:1px dashed var(--line)}
+.pkg .btn{align-self:flex-start}
+
+/* remote app */
+.studio{background:var(--navy)}
+.dl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:28px}
+.dl-card{border:1px solid var(--line);border-radius:16px;padding:22px;background:var(--navy-2);display:grid;gap:12px;align-content:start;min-width:0}
+.dl-card h3{font-size:1.15rem;margin:0}
+.dl-card p{margin:0;color:var(--muted);font-size:.9rem}
+.dl-card .store{min-width:0;padding:10px 16px}
+.dl-card .store b{font-size:1rem}
+.dl-ver{font:500 .8rem var(--mono);color:var(--muted);margin-top:18px}
+.dl-card .dl-note{font-size:.8rem;line-height:1.5;padding-top:10px;border-top:1px dashed var(--line)}
+.remote{background:linear-gradient(180deg,var(--navy),var(--navy-2))}
+.rm-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:48px;align-items:center}
+@media (max-width:860px){.rm-grid{grid-template-columns:1fr}}
+.rm-feats{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:10px}
+.rm-feats li{display:flex;gap:12px;align-items:flex-start;color:var(--muted)}
+.rm-feats li::before{content:"";flex:none;width:9px;height:9px;margin-top:8px;background:var(--cyan);transform:rotate(45deg)}
+.rm-feats b{color:var(--ink);font-weight:600}
+.stores{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.store{display:flex;align-items:center;gap:12px;padding:12px 20px;border-radius:14px;text-decoration:none;border:1px solid var(--line);color:var(--ink);background:var(--navy);min-width:220px}
+.store svg{flex:none}
+.store small{display:block;font:500 .72rem var(--mono);letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+.store b{display:block;font:700 1.15rem var(--display);line-height:1.15}
+.store.primary{background:var(--cyan);border-color:var(--cyan);color:var(--cyan-ink)}
+.store.primary small{color:var(--cyan-ink);opacity:.8}
+.store.primary:hover{background:#4dd3f0}
+.store[aria-disabled="true"]{opacity:.6;cursor:default}
+.rm-note{margin-top:14px;font-size:.85rem;color:var(--muted)}
+.rm-side{display:grid;gap:18px;justify-items:center}
+.phone{width:220px;max-width:100%;aspect-ratio:9/18.5;border-radius:34px;border:3px solid var(--cyan);background:var(--navy);padding:14px;display:flex;flex-direction:column;gap:10px;box-shadow:0 30px 60px rgba(0,0,0,.35)}
+.ph-top{display:flex;align-items:center;justify-content:space-between;font:600 .7rem var(--mono);letter-spacing:.12em;color:var(--muted)}
+.ph-top span:last-child{color:var(--ok)}
+.ph-prog{aspect-ratio:16/9;border-radius:10px;background:linear-gradient(135deg,#163150,#0f2a44);border:2px solid #e5484d;position:relative;display:grid;place-items:center;font:700 .8rem var(--display);color:var(--ink)}
+.ph-prog::before{content:"PROGRAM";position:absolute;top:6px;left:8px;font:600 .55rem var(--mono);letter-spacing:.12em;color:#ff8a8d}
+.ph-btns{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.ph-btns span{border-radius:10px;padding:10px 0;text-align:center;font:700 .78rem var(--body);background:#163150;color:var(--ink)}
+.ph-btns span.cut{background:var(--cyan);color:var(--cyan-ink)}
+.ph-btns span.rec{background:#e5484d;color:#fff}
+.ph-ins{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.ph-ins span{aspect-ratio:1;border-radius:8px;background:#163150;border:1px solid var(--line);display:grid;place-items:center;font:600 .7rem var(--mono);color:var(--muted)}
+.ph-ins span.on{border-color:var(--cyan);color:var(--cyan)}
+.ph-id{margin-top:auto;border-radius:10px;border:1px dashed var(--line);padding:8px;font:500 .7rem var(--mono);color:var(--muted);text-align:center}
+.ph-id b{color:var(--ink);letter-spacing:.1em}
+.qrbox{display:flex;align-items:center;gap:14px;background:var(--ink);color:var(--navy);border-radius:14px;padding:12px 16px 12px 12px}
+.qrbox svg{display:block;background:#fff;border-radius:6px;padding:6px;width:96px;height:96px}
+.qrbox b{display:block;font:700 1rem var(--display)}
+.qrbox span{font-size:.82rem}
+.rm-steps{margin-top:30px;border-top:1px solid var(--line);padding-top:22px}
+.rm-steps h3{font-size:1.05rem;margin-bottom:12px}
+.rm-steps ol{margin:0;padding-left:20px;display:grid;gap:6px;color:var(--muted);font-size:.95rem}
+.rm-steps b{color:var(--ink)}
+
+/* jobs */
+.jobs-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:32px;align-items:start}
+@media (max-width:900px){.jobs-layout{grid-template-columns:1fr}}
+.job{width:100%;text-align:left;background:var(--navy-2);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;color:var(--ink);cursor:pointer;display:grid;gap:6px;font:inherit;transition:border-color .15s}
+.job+.job{margin-top:12px}
+.job:hover{border-color:var(--muted)}
+.job[aria-pressed="true"]{border-color:var(--cyan);background:var(--navy-3)}
+.job strong{font-family:var(--display);font-size:1.15rem}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--mono);font-size:.7rem;padding:3px 8px;border-radius:6px;background:var(--navy);border:1px solid var(--line);color:var(--muted)}
+.job p{color:var(--muted);font-size:.93rem}
+
+/* forms */
+.panel{background:var(--navy-2);border:1px solid var(--line);border-radius:var(--r);padding:26px}
+.panel h3{margin-bottom:4px}
+.panel .sub{color:var(--muted);font-size:.92rem;margin-bottom:20px}
+form{display:grid;gap:14px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:560px){.row{grid-template-columns:1fr}}
+label{display:grid;gap:6px;font-size:.85rem;font-weight:600;color:var(--muted)}
+input,select,textarea{font:inherit;font-size:1rem;color:var(--ink);background:var(--navy);border:1px solid var(--line);border-radius:10px;padding:11px 12px;width:100%;min-width:0}
+textarea{min-height:96px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--cyan)}
+.note{font-size:.82rem;color:var(--muted)}
+.msg{border-radius:10px;padding:14px 16px;font-size:.94rem;display:grid;gap:10px}
+.msg.ok{background:color-mix(in srgb,var(--ok) 14%,transparent);border:1px solid var(--ok)}
+.msg.alt{background:color-mix(in srgb,var(--warn) 12%,transparent);border:1px solid var(--warn)}
+.msg .acts{display:flex;flex-wrap:wrap;gap:8px}
+
+.hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;opacity:0}
+/* cv upload */
+.cvdrop{display:grid;gap:6px}
+.cvdrop>label:first-child{font-size:.85rem;font-weight:600;color:var(--muted)}
+.filebox{display:flex;align-items:center;gap:12px;border:1px dashed var(--muted);border-radius:10px;padding:14px;background:var(--navy);cursor:pointer;color:var(--ink);font-weight:500;font-size:.95rem;min-width:0}
+.filebox:hover,.filebox:focus-within{border-color:var(--cyan)}
+.filebox.has{border-style:solid;border-color:var(--ok)}
+.filebox input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.fb-ic{color:var(--cyan);display:flex}
+.fb-txt{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fb-clear{background:none;border:0;color:var(--muted);font-size:1rem;cursor:pointer;padding:4px 8px;border-radius:6px}
+.fb-clear:hover{color:var(--ink);background:var(--navy-2)}
+.opt{font-weight:400;opacity:.8}
+
+/* booking */
+.book-layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:32px;align-items:start}
+@media (max-width:900px){.book-layout{grid-template-columns:1fr}}
+.cal{background:var(--navy-2);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.cal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.cal-head b{font-family:var(--display);font-size:1.3rem;font-weight:700}
+.cal-nav{width:40px;height:40px;border-radius:999px;border:1px solid var(--line);background:var(--navy);color:var(--ink);font-size:1.2rem;cursor:pointer;display:grid;place-items:center}
+.cal-nav:hover:not([disabled]){border-color:var(--cyan)}
+.cal-nav[disabled]{opacity:.35;cursor:not-allowed}
+.cal-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.cal-wd{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:center;padding-bottom:4px}
+.cal-day{aspect-ratio:1/1;max-width:100%;border-radius:10px;border:1px solid transparent;background:var(--navy);color:var(--ink);font:600 1rem var(--body);font-variant-numeric:tabular-nums;cursor:pointer;display:grid;place-items:center;position:relative;padding:0}
+.cal-day:hover:not([disabled]){border-color:var(--cyan)}
+.cal-day[disabled]{background:transparent;color:var(--muted);opacity:.4;cursor:not-allowed}
+.cal-day.today::after{content:"";position:absolute;bottom:6px;width:5px;height:5px;border-radius:50%;background:var(--warn)}
+.cal-day[aria-pressed="true"]{background:var(--cyan);color:var(--cyan-ink);border-color:var(--cyan)}
+.cal-blank{aspect-ratio:1/1}
+.cal-legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px;font-size:.78rem;color:var(--muted)}
+.cal-legend span{display:inline-flex;align-items:center;gap:6px}
+.cal-legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.slots-title{margin-top:18px;font-family:var(--display);font-weight:700;font-size:1.05rem}
+.slots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:16px}
+.slot{padding:12px 0;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--ink);font:500 .95rem var(--mono);cursor:pointer;font-variant-numeric:tabular-nums}
+.slot:hover:not([disabled]){border-color:var(--cyan)}
+.slot[aria-pressed="true"]{background:var(--cyan);color:var(--cyan-ink);border-color:var(--cyan)}
+.slot[disabled]{text-decoration:line-through;opacity:.4;cursor:not-allowed}
+.picked{margin-top:18px;font-family:var(--mono);font-size:.85rem;color:var(--muted)}
+.picked b{color:var(--ink)}
+
+/* inbox (owner only) */
+.inbox-tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.tabbtn{font:600 .9rem var(--body);background:var(--navy-2);color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:8px 16px;cursor:pointer}
+.tabbtn[aria-selected="true"]{color:var(--cyan-ink);background:var(--cyan);border-color:var(--cyan)}
+.entries{display:grid;gap:10px}
+.entry{background:var(--navy-2);border:1px solid var(--line);border-left:4px solid var(--warn);border-radius:10px;padding:16px;display:grid;gap:6px;min-width:0}
+.entry.done{border-left-color:var(--ok)}
+.entry .top{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:baseline}
+.entry strong{font-family:var(--display);font-size:1.1rem}
+.entry .meta{font-family:var(--mono);font-size:.76rem;color:var(--muted);overflow-wrap:anywhere}
+.entry p{color:var(--muted);font-size:.93rem;overflow-wrap:anywhere}
+.empty{color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:24px;text-align:center}
+
+/* contact + footer */
+.contact-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media (max-width:760px){.contact-grid{grid-template-columns:1fr}}
+.ct{border:1px solid var(--line);border-radius:var(--r);padding:20px;display:grid;gap:8px;min-width:0}
+.ct .eyebrow{font-size:.68rem}
+.ct b{font-family:var(--display);font-size:1.25rem;overflow-wrap:anywhere;user-select:all}
+footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);font-size:.85rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--navy);padding:10px 18px;border-radius:999px;font-weight:600;font-size:.9rem;z-index:50}
+</style>
+
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="#top" aria-label="M TECH INC home">
+      <svg width="34" height="38" viewBox="0 0 34 38" aria-hidden="true"><path d="M17 2 31 10v18L17 36 3 28V10z" fill="none" stroke="var(--cyan)" stroke-width="2.6"/><path d="M10 26V13l7 8 7-8v13" fill="none" stroke="var(--ink)" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="17" cy="21" r="2.2" fill="var(--cyan)"/></svg>
+      <b>M TECH</b><small>INC</small>
+    </a>
+    <button class="btn btn-ghost btn-sm menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mainNav">Menu</button>
+    <nav id="mainNav">
+      <a href="#services">Services</a>
+      <a href="#campaign">AWS Consulting</a>
+      <a href="#studio">Download</a>
+      <a href="#lyrics">Lyrics</a>
+      <a href="#remote" class="nav-remote"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg>M TECH Remote</a>
+      <a href="#careers">Careers</a>
+      <a href="#book">Book</a>
+      <a href="#contact">Contact</a>
+      <a href="#inbox" id="navInbox" hidden>Inbox</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang="it" aria-pressed="false">IT</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <svg class="hex-bg" viewBox="0 0 600 640" aria-hidden="true">
+      <g fill="none" stroke="var(--navy-3)" stroke-width="22">
+        <path d="M300 30 560 180v280L300 610 40 460V180z"/>
+        <path d="M300 130 470 228v184L300 510 130 412V228z" stroke-width="14"/>
+      </g>
+    </svg>
+    <div class="wrap" style="position:relative">
+      <div class="hero-side">
+        <aside class="hero-dl" aria-label="Download M-TECH STUDIO and the M TECH Remote phone app">
+          <h2>Download M-TECH STUDIO</h2>
+          <div class="hd-group"><span>Windows</span><a class="hd" id="hWin" href="#studio">Windows (.exe)</a></div>
+          <div class="hd-group"><span>macOS</span><a class="hd" id="hMacArm" href="#studio">Apple Silicon (.dmg)</a><a class="hd" id="hMacIntel" href="#studio">Intel Mac (.dmg)</a></div>
+          <div class="hd-group"><span>Linux</span><a class="hd" id="hLinuxApp" href="#studio">AppImage</a><a class="hd" id="hLinuxDeb" href="#studio">Ubuntu / Debian (.deb)</a></div>
+          <div class="hd-group"><span>Phone app</span><a class="hd hd-pri" id="heroAndroid" href="#remote">Android</a><a class="hd hd-pri" id="heroIos" href="#iphoneSteps">iPhone</a></div>
+        </aside>
+        <aside class="hero-dl" aria-label="Download M TECH Lyrics">
+          <h2>Download M&nbsp;TECH&nbsp;Lyrics</h2>
+          <div class="hd-group"><span>Windows</span><a class="hd" id="hlWin" href="#lyrics">Windows (.exe)</a></div>
+          <div class="hd-group"><span>macOS</span><a class="hd" id="hlMacArm" href="#lyrics">Apple Silicon (.zip)</a><a class="hd" id="hlMacIntel" href="#lyrics">Intel Mac (.zip)</a></div>
+          <div class="hd-group"><span>Linux</span><a class="hd" id="hlLinuxApp" href="#lyrics">AppImage</a><a class="hd" id="hlLinuxDeb" href="#lyrics">Ubuntu / Debian (.deb)</a></div>
+          <div class="hd-group"><span>Web version</span><a class="hd hd-pri" id="hlWeb" href="#lyrics" target="_blank" rel="noopener">Open in your browser</a></div>
+        </aside>
+      </div>
+      <span class="eyebrow">AWS Cloud · Software · Deployment · AI &amp; Automation</span>
+      <h1><span>Build.</span><span>Automate.</span><span>Scale.</span></h1>
+      <p class="lede">We write the software and we deploy it. Websites, apps, custom software, automation and AI features, shipped to AWS and kept running, for clients all over the world, by a team led by a certified AWS Solutions Architect. Headquartered in Padova, Italy.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#book">Book a consultation</a>
+        <a class="btn btn-ghost" href="#campaign">Free AWS cloud assessment</a>
+      </div>
+      <div class="cred">
+        <span>AWS Certified Solutions Architect – Associate</span>
+        <span>Clients worldwide · remote-first</span>
+        <span>Broadcast &amp; telecom delivery</span>
+        <span>English · Italiano · Français</span>
+      </div>
+    </div>
+  </div>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">What we do</span>
+        <h2>Software, deployment and AI, one team.</h2>
+        <p class="lede">Every engineer here builds and deploys. The people who write your code also put it into production and keep it healthy, so nothing gets lost in a hand-over.</p>
+      </div>
+      <div class="svc-grid">
+        <div class="svc-group">
+          <h3>Cloud &amp; DevOps</h3>
+          <div class="svc"><i>01</i><strong>Cloud Migration</strong><p>Move servers, databases and apps to AWS with a tested cut-over plan and no surprise downtime.</p></div>
+          <div class="svc"><i>02</i><strong>Solutions Architecture</strong><p>Well-Architected designs for availability, security and cost, documented so your team can own them.</p></div>
+          <div class="svc"><i>03</i><strong>DevOps &amp; CI/CD</strong><p>Pipelines with GitHub Actions or CodePipeline: build, test and deploy on every merge.</p></div>
+          <div class="svc"><i>04</i><strong>Containers &amp; IaC</strong><p>Docker, ECS, EKS and Terraform or CloudFormation, so every environment is reproducible.</p></div>
+        </div>
+        <div class="svc-group">
+          <h3>Software Development</h3>
+          <div class="svc"><i>05</i><strong>Websites</strong><p>Fast, responsive company sites hosted on S3 and CloudFront, ready for search and mobile.</p></div>
+          <div class="svc"><i>06</i><strong>Web Apps</strong><p>Dashboards, portals and SaaS products built with React, Next.js, Node and Python.</p></div>
+          <div class="svc"><i>07</i><strong>Mobile Apps</strong><p>iOS and Android apps with secure cloud back ends and payment integrations.</p></div>
+          <div class="svc"><i>08</i><strong>Custom Software</strong><p>Broadcast tools, banking and loan systems, AI assistants: software shaped to how you work.</p></div>
+        </div>
+        <div class="svc-group">
+          <h3>Automation &amp; AI</h3>
+          <div class="svc"><i>09</i><strong>Workflow Automation</strong><p>Connect your apps and remove manual steps with AWS Lambda, Step Functions and scheduled jobs.</p></div>
+          <div class="svc"><i>10</i><strong>AI Enhancement</strong><p>Add AI to software you already have: smart search, summaries, translation and assistants, built on Amazon Bedrock or OpenAI.</p></div>
+          <div class="svc"><i>11</i><strong>AI Chat &amp; Phone Assistants</strong><p>Multilingual assistants that answer customers on your website, WhatsApp or phone, and send you a summary.</p></div>
+          <div class="svc"><i>12</i><strong>Document &amp; Data Automation</strong><p>Read invoices, forms and reports automatically and feed the data into your systems and dashboards.</p></div>
+        </div>
+      </div>
+      <div class="pipeline" aria-label="How every project is delivered">
+        <div class="pl-head"><span class="eyebrow">How we deliver</span><h3>Every project we build, we deploy.</h3></div>
+        <ol class="pl-steps">
+          <li><b>Build</b><span>Code in Git, reviewed on every pull request</span></li>
+          <li><b>Test</b><span>Automated tests run in the CI pipeline</span></li>
+          <li><b>Deploy</b><span>Docker images shipped to AWS with Terraform</span></li>
+          <li><b>Run</b><span>CloudWatch monitoring, backups and updates</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section id="campaign" class="campaign">
+    <div class="wrap">
+      <div class="camp-top">
+        <div class="sec-head" style="margin:0">
+          <span class="tag">Campaign · Autumn 2026</span>
+          <span class="eyebrow">AWS Cloud Consulting Group</span>
+          <h2>Your AWS bill and architecture, reviewed by a certified architect.</h2>
+          <p class="lede">For startups and companies anywhere in the world running on AWS, or planning to. We deploy to the AWS Region closest to your users. We check your workloads against the six Well-Architected pillars and hand you a prioritised action plan.</p>
+        </div>
+        <div class="offer">
+          <b>Free 30-minute cloud assessment</b>
+          <p>A video call with a walkthrough of your current setup and three concrete improvements you can make this month.</p>
+          <button class="btn btn-primary" data-book="AWS Cloud Assessment (free)">Claim your assessment</button>
+        </div>
+      </div>
+      <div class="pkgs">
+        <div class="pkg">
+          <span class="phase">Phase 1 · Assess</span>
+          <h3>Cloud Readiness Review</h3>
+          <ul><li>Inventory of servers, apps and data</li><li>Security and IAM baseline check</li><li>Migration strategy per workload (the 7 Rs)</li></ul>
+          <span class="dur">Typical duration · 1–2 weeks</span>
+          <button class="btn btn-ghost btn-sm" data-book="Cloud Readiness Review">Book this</button>
+        </div>
+        <div class="pkg">
+          <span class="phase">Phase 2 · Migrate</span>
+          <h3>Migration Sprint</h3>
+          <ul><li>Landing zone with multi-account setup</li><li>Infrastructure as Code from day one</li><li>CI/CD pipeline and rollback plan</li></ul>
+          <span class="dur">Typical duration · 3–6 weeks</span>
+          <button class="btn btn-ghost btn-sm" data-book="Migration Sprint">Book this</button>
+        </div>
+        <div class="pkg">
+          <span class="phase">Phase 3 · Optimise</span>
+          <h3>Cost &amp; Performance Tune-up</h3>
+          <ul><li>Rightsizing and Savings Plans review</li><li>Monitoring with CloudWatch alarms</li><li>Monthly report on spend and uptime</li></ul>
+          <span class="dur">Typical duration · ongoing, monthly</span>
+          <button class="btn btn-ghost btn-sm" data-book="Cost & Performance Tune-up">Book this</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="studio" class="studio">
+    <div class="wrap">
+      <div class="sec-head" style="margin:0">
+        <span class="eyebrow">Software · M-TECH STUDIO</span>
+        <h2>Download M-TECH STUDIO</h2>
+        <p class="lede">Live production for any PC: switch cameras, graphics, audio, recording and streaming, even on a low-spec computer. Free download for Windows, macOS and Linux.</p>
+      </div>
+      <div class="dl-grid">
+        <div class="dl-card">
+          <h3>Windows</h3>
+          <p>Windows 10 and 11, 64-bit. NDI included.</p>
+          <a class="store primary" id="dlWin" href="#studio" rel="noopener"><span><small>Download for</small><b>Windows (.exe)</b></span></a>
+        </div>
+        <div class="dl-card">
+          <h3>macOS</h3>
+          <p>Choose your Mac: Apple Silicon (M1 or newer) or Intel.</p>
+          <a class="store primary" id="dlMacArm" href="#studio" rel="noopener"><span><small>Download for</small><b>Apple Silicon (.dmg)</b></span></a>
+          <a class="store" id="dlMacIntel" href="#studio" rel="noopener"><span><small>Download for</small><b>Intel Mac (.dmg)</b></span></a>
+        </div>
+        <div class="dl-card">
+          <h3>Linux</h3>
+          <p>64-bit PCs. NDI included. AppImage runs anywhere; .deb is for Ubuntu and Debian.</p>
+          <a class="store primary" id="dlLinuxApp" href="#studio" rel="noopener"><span><small>Download for</small><b>Linux (.AppImage)</b></span></a>
+          <a class="store" id="dlLinuxDeb" href="#studio" rel="noopener"><span><small>Download for</small><b>Ubuntu / Debian (.deb)</b></span></a>
+        </div>
+        <div class="dl-card">
+          <h3>Phone app</h3>
+          <p>M TECH Remote controls the studio from your phone, anywhere.</p>
+          <a class="store primary" id="dlAndroid2" href="#remote"><span><small>Download for</small><b>Android</b></span></a>
+          <a class="store" id="dlIos2" href="#iphoneSteps"><span><small>Get it on</small><b>iPhone</b></span></a>
+        </div>
+      </div>
+      <p class="dl-ver">Version <span id="studioVer"></span> · <a id="dlAll" href="#studio" rel="noopener" style="color:var(--cyan)">All downloads and release notes</a></p>
+    </div>
+  </section>
+
+  <section id="lyrics" class="studio">
+    <div class="wrap">
+      <div class="sec-head" style="margin:0">
+        <span class="eyebrow">Software · M TECH Lyrics</span>
+        <h2>Download M&nbsp;TECH&nbsp;Lyrics</h2>
+        <p class="lede">Lyrics and hymns on screen for church services. Search a song online or open your church's hymn book, click a verse and it appears on the projector, the TV or the live stream. Free download for Windows, macOS and Linux, in 8 languages.</p>
+      </div>
+      <div class="dl-grid">
+        <div class="dl-card">
+          <h3>Windows</h3>
+          <p>Windows 10 and 11, 64-bit. NDI included.</p>
+          <a class="store primary" id="lyWin" href="#lyrics" rel="noopener"><span><small>Download for</small><b>Windows (.exe)</b></span></a>
+          <p class="dl-note">If Windows says “Windows protected your PC”, click More info, then Run anyway.</p>
+        </div>
+        <div class="dl-card">
+          <h3>macOS</h3>
+          <p>Choose your Mac: Apple Silicon (M1 or newer) or Intel. Needs macOS 13 or newer.</p>
+          <a class="store primary" id="lyMacArm" href="#lyrics" rel="noopener"><span><small>Download for</small><b>Apple Silicon (.zip)</b></span></a>
+          <a class="store" id="lyMacIntel" href="#lyrics" rel="noopener"><span><small>Download for</small><b>Intel Mac (.zip)</b></span></a>
+          <p class="dl-note">Open the .zip and drag M TECH Lyrics into Applications. If macOS blocks it the first time, open System Settings → Privacy &amp; Security and click Open Anyway.</p>
+        </div>
+        <div class="dl-card">
+          <h3>Linux</h3>
+          <p>64-bit PCs. NDI included. AppImage runs anywhere; .deb is for Ubuntu and Debian.</p>
+          <a class="store primary" id="lyLinuxApp" href="#lyrics" rel="noopener"><span><small>Download for</small><b>Linux (.AppImage)</b></span></a>
+          <a class="store" id="lyLinuxDeb" href="#lyrics" rel="noopener"><span><small>Download for</small><b>Ubuntu / Debian (.deb)</b></span></a>
+        </div>
+        <div class="dl-card">
+          <h3>Web version</h3>
+          <p>Runs in the browser on any computer, tablet or phone. Nothing to install.</p>
+          <a class="store primary" id="lyWeb" href="#lyrics" target="_blank" rel="noopener"><span><small>In your browser</small><b>Open M TECH Lyrics</b></span></a>
+        </div>
+      </div>
+      <p class="dl-ver">Version <span id="lyricsVer"></span> · <a id="lyAll" href="#lyrics" rel="noopener" style="color:var(--cyan)">All downloads and release notes</a></p>
+    </div>
+  </section>
+
+  <section id="remote" class="remote">
+    <div class="wrap">
+      <div class="rm-grid">
+        <div>
+          <div class="sec-head" style="margin:0">
+            <span class="eyebrow">Mobile app · M-TECH STUDIO</span>
+            <h2>M TECH Remote</h2>
+            <p class="lede">Control M-TECH STUDIO from your phone, from anywhere in the world. See the Program screen live and run your show without touching the computer.</p>
+          </div>
+          <ul class="rm-feats">
+            <li><span><b>All studio controls</b> on your phone: inputs, cut and transitions, audio and recording.</span></li>
+            <li><span><b>Live Program screen</b>, so you always see what the audience sees.</span></li>
+            <li><span><b>Connect from anywhere</b>, even when the phone and the studio are in different countries.</span></li>
+            <li><span><b>Secure pairing</b> with an ID and password, using Phone Connect in the studio's Settings.</span></li>
+          </ul>
+          <div class="stores">
+            <a class="store primary" id="dlAndroid" href="https://github.com/ndumbestedrielnmbuaaws/M-TECH-STUDIO-DOWNLOAD/releases/latest/download/M-TECH-Remote.apk" rel="noopener">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.6 9.48l1.84-3.18a.5.5 0 0 0-.87-.5l-1.86 3.22a11.4 11.4 0 0 0-9.42 0L5.43 5.8a.5.5 0 0 0-.87.5L6.4 9.48A10.8 10.8 0 0 0 1 18h22a10.8 10.8 0 0 0-5.4-8.52zM7 15.25A1.25 1.25 0 1 1 8.25 14 1.25 1.25 0 0 1 7 15.25zm10 0A1.25 1.25 0 1 1 18.25 14 1.25 1.25 0 0 1 17 15.25z"/></svg>
+              <span><small>Download for</small><b>Android</b></span>
+            </a>
+            <a class="store" id="dlIos" href="#iphoneSteps">
+              <svg width="24" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.37 12.6c-.02-2.3 1.88-3.4 1.96-3.46a4.2 4.2 0 0 0-3.31-1.8c-1.4-.14-2.75.83-3.46.83-.72 0-1.81-.81-2.98-.79a4.4 4.4 0 0 0-3.72 2.27c-1.6 2.77-.41 6.86 1.14 9.1.76 1.1 1.66 2.33 2.84 2.29 1.14-.05 1.57-.74 2.95-.74 1.37 0 1.76.74 2.96.71 1.23-.02 2-1.11 2.75-2.22a9.7 9.7 0 0 0 1.25-2.57 3.97 3.97 0 0 1-2.38-3.62zM14.1 5.86A3.94 3.94 0 0 0 15 3a4 4 0 0 0-2.6 1.35 3.76 3.76 0 0 0-.93 2.75 3.3 3.3 0 0 0 2.63-1.24z"/></svg>
+              <span><small id="iosLabel">Open in Safari</small><b>iPhone</b></span>
+            </a>
+          </div>
+          <p class="rm-note">Free download. Works with M-TECH STUDIO on Windows, macOS and Linux.</p>
+          <div class="rm-steps">
+            <h3>Install on Android</h3>
+            <ol>
+              <li>Tap <b>Download for Android</b> on your phone.</li>
+              <li>Open the downloaded file <b>M-TECH-Remote.apk</b>.</li>
+              <li>If asked, allow your browser to <b>install unknown apps</b>, then tap <b>Install</b>.</li>
+              <li>Open M TECH Remote, then in M-TECH STUDIO go to <b>Settings → Phone Connect</b> and enter the ID and password shown on your phone.</li>
+            </ol>
+          </div>
+          <div class="rm-steps" id="iphoneSteps">
+            <h3>Install on iPhone</h3>
+            <ol>
+              <li>On your iPhone open <b>Safari</b> and tap <b>Open in Safari</b> above<span id="iosAddr" hidden style="display:block;font-family:var(--mono);color:var(--cyan);overflow-wrap:anywhere"></span>.</li>
+              <li>Tap the <b>Share</b> button, then <b>Add to Home Screen</b>.</li>
+              <li>Open <b>M TECH Remote</b> from your home screen, type your ID number and password, and tap <b>Phone Connect</b>.</li>
+              <li>In M-TECH STUDIO go to <b>Settings → Phone Connect</b>, type the same ID and password and press <b>Connect</b>.</li>
+            </ol>
+            <p class="rm-note">It works like the Android app and needs no App Store. A store version is planned for later.</p>
+          </div>
+        </div>
+        <div class="rm-side">
+          <div class="phone" aria-hidden="true">
+            <div class="ph-top"><span>M TECH REMOTE</span><span>● LIVE</span></div>
+            <div class="ph-prog">Sunday Service</div>
+            <div class="ph-btns"><span class="cut">CUT</span><span>FADE</span><span class="rec">● REC</span><span>AUDIO</span></div>
+            <div class="ph-ins"><span class="on">1</span><span>2</span><span>3</span><span>4</span></div>
+            <div class="ph-id">ID <b>482 913 507</b></div>
+          </div>
+          <div class="qrbox">
+            <svg width="132" height="132" viewBox="0 0 41 41" shape-rendering="crispEdges" role="img" aria-label="QR code to download M TECH Remote for Android"><path d="M0 0h1v1h-1zM1 0h1v1h-1zM2 0h1v1h-1zM3 0h1v1h-1zM4 0h1v1h-1zM5 0h1v1h-1zM6 0h1v1h-1zM8 0h1v1h-1zM11 0h1v1h-1zM12 0h1v1h-1zM16 0h1v1h-1zM17 0h1v1h-1zM18 0h1v1h-1zM19 0h1v1h-1zM23 0h1v1h-1zM27 0h1v1h-1zM28 0h1v1h-1zM34 0h1v1h-1zM35 0h1v1h-1zM36 0h1v1h-1zM37 0h1v1h-1zM38 0h1v1h-1zM39 0h1v1h-1zM40 0h1v1h-1zM0 1h1v1h-1zM6 1h1v1h-1zM9 1h1v1h-1zM10 1h1v1h-1zM11 1h1v1h-1zM14 1h1v1h-1zM15 1h1v1h-1zM16 1h1v1h-1zM17 1h1v1h-1zM19 1h1v1h-1zM20 1h1v1h-1zM28 1h1v1h-1zM30 1h1v1h-1zM31 1h1v1h-1zM34 1h1v1h-1zM40 1h1v1h-1zM0 2h1v1h-1zM2 2h1v1h-1zM3 2h1v1h-1zM4 2h1v1h-1zM6 2h1v1h-1zM10 2h1v1h-1zM11 2h1v1h-1zM13 2h1v1h-1zM16 2h1v1h-1zM20 2h1v1h-1zM21 2h1v1h-1zM23 2h1v1h-1zM25 2h1v1h-1zM29 2h1v1h-1zM30 2h1v1h-1zM32 2h1v1h-1zM34 2h1v1h-1zM36 2h1v1h-1zM37 2h1v1h-1zM38 2h1v1h-1zM40 2h1v1h-1zM0 3h1v1h-1zM2 3h1v1h-1zM3 3h1v1h-1zM4 3h1v1h-1zM6 3h1v1h-1zM8 3h1v1h-1zM13 3h1v1h-1zM14 3h1v1h-1zM15 3h1v1h-1zM16 3h1v1h-1zM17 3h1v1h-1zM18 3h1v1h-1zM21 3h1v1h-1zM22 3h1v1h-1zM23 3h1v1h-1zM26 3h1v1h-1zM30 3h1v1h-1zM34 3h1v1h-1zM36 3h1v1h-1zM37 3h1v1h-1zM38 3h1v1h-1zM40 3h1v1h-1zM0 4h1v1h-1zM2 4h1v1h-1zM3 4h1v1h-1zM4 4h1v1h-1zM6 4h1v1h-1zM8 4h1v1h-1zM9 4h1v1h-1zM11 4h1v1h-1zM13 4h1v1h-1zM15 4h1v1h-1zM16 4h1v1h-1zM18 4h1v1h-1zM21 4h1v1h-1zM22 4h1v1h-1zM25 4h1v1h-1zM26 4h1v1h-1zM27 4h1v1h-1zM28 4h1v1h-1zM34 4h1v1h-1zM36 4h1v1h-1zM37 4h1v1h-1zM38 4h1v1h-1zM40 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM8 5h1v1h-1zM9 5h1v1h-1zM10 5h1v1h-1zM11 5h1v1h-1zM13 5h1v1h-1zM14 5h1v1h-1zM17 5h1v1h-1zM18 5h1v1h-1zM19 5h1v1h-1zM20 5h1v1h-1zM21 5h1v1h-1zM22 5h1v1h-1zM24 5h1v1h-1zM26 5h1v1h-1zM28 5h1v1h-1zM29 5h1v1h-1zM31 5h1v1h-1zM34 5h1v1h-1zM40 5h1v1h-1zM0 6h1v1h-1zM1 6h1v1h-1zM2 6h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1zM5 6h1v1h-1zM6 6h1v1h-1zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM20 6h1v1h-1zM22 6h1v1h-1zM24 6h1v1h-1zM26 6h1v1h-1zM28 6h1v1h-1zM30 6h1v1h-1zM32 6h1v1h-1zM34 6h1v1h-1zM35 6h1v1h-1zM36 6h1v1h-1zM37 6h1v1h-1zM38 6h1v1h-1zM39 6h1v1h-1zM40 6h1v1h-1zM8 7h1v1h-1zM11 7h1v1h-1zM13 7h1v1h-1zM15 7h1v1h-1zM16 7h1v1h-1zM17 7h1v1h-1zM19 7h1v1h-1zM21 7h1v1h-1zM23 7h1v1h-1zM24 7h1v1h-1zM29 7h1v1h-1zM30 7h1v1h-1zM32 7h1v1h-1zM0 8h1v1h-1zM4 8h1v1h-1zM6 8h1v1h-1zM7 8h1v1h-1zM8 8h1v1h-1zM10 8h1v1h-1zM13 8h1v1h-1zM14 8h1v1h-1zM15 8h1v1h-1zM16 8h1v1h-1zM17 8h1v1h-1zM19 8h1v1h-1zM20 8h1v1h-1zM21 8h1v1h-1zM22 8h1v1h-1zM24 8h1v1h-1zM26 8h1v1h-1zM29 8h1v1h-1zM32 8h1v1h-1zM33 8h1v1h-1zM34 8h1v1h-1zM35 8h1v1h-1zM36 8h1v1h-1zM37 8h1v1h-1zM40 8h1v1h-1zM0 9h1v1h-1zM1 9h1v1h-1zM2 9h1v1h-1zM4 9h1v1h-1zM5 9h1v1h-1zM7 9h1v1h-1zM8 9h1v1h-1zM13 9h1v1h-1zM14 9h1v1h-1zM15 9h1v1h-1zM18 9h1v1h-1zM23 9h1v1h-1zM24 9h1v1h-1zM25 9h1v1h-1zM26 9h1v1h-1zM27 9h1v1h-1zM28 9h1v1h-1zM30 9h1v1h-1zM34 9h1v1h-1zM35 9h1v1h-1zM36 9h1v1h-1zM37 9h1v1h-1zM39 9h1v1h-1zM0 10h1v1h-1zM1 10h1v1h-1zM2 10h1v1h-1zM4 10h1v1h-1zM6 10h1v1h-1zM7 10h1v1h-1zM8 10h1v1h-1zM14 10h1v1h-1zM17 10h1v1h-1zM18 10h1v1h-1zM20 10h1v1h-1zM21 10h1v1h-1zM23 10h1v1h-1zM24 10h1v1h-1zM25 10h1v1h-1zM27 10h1v1h-1zM32 10h1v1h-1zM36 10h1v1h-1zM40 10h1v1h-1zM1 11h1v1h-1zM2 11h1v1h-1zM3 11h1v1h-1zM7 11h1v1h-1zM10 11h1v1h-1zM17 11h1v1h-1zM18 11h1v1h-1zM20 11h1v1h-1zM21 11h1v1h-1zM23 11h1v1h-1zM24 11h1v1h-1zM26 11h1v1h-1zM27 11h1v1h-1zM29 11h1v1h-1zM31 11h1v1h-1zM32 11h1v1h-1zM36 11h1v1h-1zM37 11h1v1h-1zM40 11h1v1h-1zM3 12h1v1h-1zM4 12h1v1h-1zM6 12h1v1h-1zM7 12h1v1h-1zM8 12h1v1h-1zM11 12h1v1h-1zM13 12h1v1h-1zM15 12h1v1h-1zM16 12h1v1h-1zM17 12h1v1h-1zM22 12h1v1h-1zM23 12h1v1h-1zM24 12h1v1h-1zM26 12h1v1h-1zM28 12h1v1h-1zM29 12h1v1h-1zM32 12h1v1h-1zM33 12h1v1h-1zM39 12h1v1h-1zM40 12h1v1h-1zM3 13h1v1h-1zM5 13h1v1h-1zM7 13h1v1h-1zM9 13h1v1h-1zM11 13h1v1h-1zM13 13h1v1h-1zM14 13h1v1h-1zM18 13h1v1h-1zM19 13h1v1h-1zM20 13h1v1h-1zM25 13h1v1h-1zM26 13h1v1h-1zM33 13h1v1h-1zM34 13h1v1h-1zM35 13h1v1h-1zM36 13h1v1h-1zM38 13h1v1h-1zM39 13h1v1h-1zM40 13h1v1h-1zM0 14h1v1h-1zM1 14h1v1h-1zM2 14h1v1h-1zM3 14h1v1h-1zM4 14h1v1h-1zM5 14h1v1h-1zM6 14h1v1h-1zM9 14h1v1h-1zM10 14h1v1h-1zM12 14h1v1h-1zM16 14h1v1h-1zM17 14h1v1h-1zM18 14h1v1h-1zM20 14h1v1h-1zM21 14h1v1h-1zM25 14h1v1h-1zM26 14h1v1h-1zM27 14h1v1h-1zM33 14h1v1h-1zM34 14h1v1h-1zM37 14h1v1h-1zM40 14h1v1h-1zM0 15h1v1h-1zM1 15h1v1h-1zM3 15h1v1h-1zM4 15h1v1h-1zM5 15h1v1h-1zM8 15h1v1h-1zM9 15h1v1h-1zM11 15h1v1h-1zM14 15h1v1h-1zM17 15h1v1h-1zM18 15h1v1h-1zM21 15h1v1h-1zM22 15h1v1h-1zM24 15h1v1h-1zM26 15h1v1h-1zM27 15h1v1h-1zM28 15h1v1h-1zM29 15h1v1h-1zM30 15h1v1h-1zM31 15h1v1h-1zM32 15h1v1h-1zM35 15h1v1h-1zM36 15h1v1h-1zM37 15h1v1h-1zM40 15h1v1h-1zM2 16h1v1h-1zM5 16h1v1h-1zM6 16h1v1h-1zM7 16h1v1h-1zM10 16h1v1h-1zM11 16h1v1h-1zM14 16h1v1h-1zM15 16h1v1h-1zM16 16h1v1h-1zM19 16h1v1h-1zM21 16h1v1h-1zM23 16h1v1h-1zM24 16h1v1h-1zM29 16h1v1h-1zM32 16h1v1h-1zM35 16h1v1h-1zM37 16h1v1h-1zM0 17h1v1h-1zM1 17h1v1h-1zM2 17h1v1h-1zM5 17h1v1h-1zM7 17h1v1h-1zM8 17h1v1h-1zM9 17h1v1h-1zM10 17h1v1h-1zM12 17h1v1h-1zM13 17h1v1h-1zM14 17h1v1h-1zM16 17h1v1h-1zM18 17h1v1h-1zM19 17h1v1h-1zM21 17h1v1h-1zM23 17h1v1h-1zM25 17h1v1h-1zM26 17h1v1h-1zM27 17h1v1h-1zM28 17h1v1h-1zM33 17h1v1h-1zM34 17h1v1h-1zM35 17h1v1h-1zM36 17h1v1h-1zM37 17h1v1h-1zM38 17h1v1h-1zM40 17h1v1h-1zM0 18h1v1h-1zM1 18h1v1h-1zM3 18h1v1h-1zM5 18h1v1h-1zM6 18h1v1h-1zM7 18h1v1h-1zM9 18h1v1h-1zM11 18h1v1h-1zM12 18h1v1h-1zM13 18h1v1h-1zM16 18h1v1h-1zM17 18h1v1h-1zM20 18h1v1h-1zM23 18h1v1h-1zM24 18h1v1h-1zM27 18h1v1h-1zM28 18h1v1h-1zM29 18h1v1h-1zM34 18h1v1h-1zM35 18h1v1h-1zM37 18h1v1h-1zM38 18h1v1h-1zM40 18h1v1h-1zM0 19h1v1h-1zM2 19h1v1h-1zM4 19h1v1h-1zM8 19h1v1h-1zM10 19h1v1h-1zM13 19h1v1h-1zM14 19h1v1h-1zM15 19h1v1h-1zM17 19h1v1h-1zM18 19h1v1h-1zM20 19h1v1h-1zM22 19h1v1h-1zM24 19h1v1h-1zM26 19h1v1h-1zM27 19h1v1h-1zM29 19h1v1h-1zM32 19h1v1h-1zM34 19h1v1h-1zM35 19h1v1h-1zM37 19h1v1h-1zM39 19h1v1h-1zM40 19h1v1h-1zM4 20h1v1h-1zM6 20h1v1h-1zM7 20h1v1h-1zM8 20h1v1h-1zM9 20h1v1h-1zM10 20h1v1h-1zM12 20h1v1h-1zM13 20h1v1h-1zM16 20h1v1h-1zM18 20h1v1h-1zM22 20h1v1h-1zM23 20h1v1h-1zM25 20h1v1h-1zM26 20h1v1h-1zM28 20h1v1h-1zM29 20h1v1h-1zM31 20h1v1h-1zM32 20h1v1h-1zM33 20h1v1h-1zM37 20h1v1h-1zM39 20h1v1h-1zM1 21h1v1h-1zM3 21h1v1h-1zM4 21h1v1h-1zM5 21h1v1h-1zM10 21h1v1h-1zM15 21h1v1h-1zM21 21h1v1h-1zM27 21h1v1h-1zM28 21h1v1h-1zM29 21h1v1h-1zM30 21h1v1h-1zM34 21h1v1h-1zM35 21h1v1h-1zM36 21h1v1h-1zM37 21h1v1h-1zM38 21h1v1h-1zM40 21h1v1h-1zM1 22h1v1h-1zM2 22h1v1h-1zM3 22h1v1h-1zM5 22h1v1h-1zM6 22h1v1h-1zM8 22h1v1h-1zM9 22h1v1h-1zM12 22h1v1h-1zM13 22h1v1h-1zM14 22h1v1h-1zM15 22h1v1h-1zM16 22h1v1h-1zM17 22h1v1h-1zM18 22h1v1h-1zM20 22h1v1h-1zM23 22h1v1h-1zM24 22h1v1h-1zM25 22h1v1h-1zM26 22h1v1h-1zM27 22h1v1h-1zM29 22h1v1h-1zM38 22h1v1h-1zM40 22h1v1h-1zM1 23h1v1h-1zM5 23h1v1h-1zM8 23h1v1h-1zM9 23h1v1h-1zM11 23h1v1h-1zM12 23h1v1h-1zM17 23h1v1h-1zM18 23h1v1h-1zM19 23h1v1h-1zM20 23h1v1h-1zM21 23h1v1h-1zM22 23h1v1h-1zM23 23h1v1h-1zM24 23h1v1h-1zM27 23h1v1h-1zM28 23h1v1h-1zM29 23h1v1h-1zM30 23h1v1h-1zM31 23h1v1h-1zM32 23h1v1h-1zM33 23h1v1h-1zM34 23h1v1h-1zM36 23h1v1h-1zM37 23h1v1h-1zM0 24h1v1h-1zM3 24h1v1h-1zM6 24h1v1h-1zM7 24h1v1h-1zM9 24h1v1h-1zM12 24h1v1h-1zM13 24h1v1h-1zM15 24h1v1h-1zM16 24h1v1h-1zM17 24h1v1h-1zM20 24h1v1h-1zM21 24h1v1h-1zM22 24h1v1h-1zM23 24h1v1h-1zM24 24h1v1h-1zM28 24h1v1h-1zM29 24h1v1h-1zM32 24h1v1h-1zM33 24h1v1h-1zM37 24h1v1h-1zM40 24h1v1h-1zM0 25h1v1h-1zM1 25h1v1h-1zM4 25h1v1h-1zM7 25h1v1h-1zM8 25h1v1h-1zM14 25h1v1h-1zM17 25h1v1h-1zM23 25h1v1h-1zM26 25h1v1h-1zM27 25h1v1h-1zM28 25h1v1h-1zM32 25h1v1h-1zM34 25h1v1h-1zM36 25h1v1h-1zM38 25h1v1h-1zM40 25h1v1h-1zM1 26h1v1h-1zM4 26h1v1h-1zM6 26h1v1h-1zM7 26h1v1h-1zM10 26h1v1h-1zM17 26h1v1h-1zM18 26h1v1h-1zM20 26h1v1h-1zM22 26h1v1h-1zM23 26h1v1h-1zM24 26h1v1h-1zM25 26h1v1h-1zM26 26h1v1h-1zM27 26h1v1h-1zM28 26h1v1h-1zM29 26h1v1h-1zM30 26h1v1h-1zM32 26h1v1h-1zM34 26h1v1h-1zM36 26h1v1h-1zM39 26h1v1h-1zM40 26h1v1h-1zM2 27h1v1h-1zM4 27h1v1h-1zM5 27h1v1h-1zM8 27h1v1h-1zM13 27h1v1h-1zM15 27h1v1h-1zM17 27h1v1h-1zM20 27h1v1h-1zM21 27h1v1h-1zM24 27h1v1h-1zM26 27h1v1h-1zM27 27h1v1h-1zM28 27h1v1h-1zM29 27h1v1h-1zM30 27h1v1h-1zM31 27h1v1h-1zM32 27h1v1h-1zM33 27h1v1h-1zM34 27h1v1h-1zM35 27h1v1h-1zM37 27h1v1h-1zM39 27h1v1h-1zM40 27h1v1h-1zM0 28h1v1h-1zM1 28h1v1h-1zM4 28h1v1h-1zM5 28h1v1h-1zM6 28h1v1h-1zM10 28h1v1h-1zM11 28h1v1h-1zM13 28h1v1h-1zM14 28h1v1h-1zM17 28h1v1h-1zM19 28h1v1h-1zM20 28h1v1h-1zM22 28h1v1h-1zM23 28h1v1h-1zM25 28h1v1h-1zM27 28h1v1h-1zM29 28h1v1h-1zM32 28h1v1h-1zM33 28h1v1h-1zM40 28h1v1h-1zM0 29h1v1h-1zM1 29h1v1h-1zM3 29h1v1h-1zM4 29h1v1h-1zM5 29h1v1h-1zM7 29h1v1h-1zM10 29h1v1h-1zM11 29h1v1h-1zM18 29h1v1h-1zM19 29h1v1h-1zM21 29h1v1h-1zM24 29h1v1h-1zM26 29h1v1h-1zM28 29h1v1h-1zM30 29h1v1h-1zM32 29h1v1h-1zM34 29h1v1h-1zM35 29h1v1h-1zM36 29h1v1h-1zM38 29h1v1h-1zM40 29h1v1h-1zM2 30h1v1h-1zM4 30h1v1h-1zM6 30h1v1h-1zM8 30h1v1h-1zM9 30h1v1h-1zM12 30h1v1h-1zM13 30h1v1h-1zM14 30h1v1h-1zM19 30h1v1h-1zM23 30h1v1h-1zM24 30h1v1h-1zM25 30h1v1h-1zM26 30h1v1h-1zM28 30h1v1h-1zM29 30h1v1h-1zM30 30h1v1h-1zM32 30h1v1h-1zM33 30h1v1h-1zM35 30h1v1h-1zM36 30h1v1h-1zM40 30h1v1h-1zM3 31h1v1h-1zM5 31h1v1h-1zM9 31h1v1h-1zM11 31h1v1h-1zM15 31h1v1h-1zM16 31h1v1h-1zM17 31h1v1h-1zM18 31h1v1h-1zM19 31h1v1h-1zM20 31h1v1h-1zM21 31h1v1h-1zM23 31h1v1h-1zM29 31h1v1h-1zM32 31h1v1h-1zM33 31h1v1h-1zM35 31h1v1h-1zM37 31h1v1h-1zM40 31h1v1h-1zM0 32h1v1h-1zM1 32h1v1h-1zM2 32h1v1h-1zM4 32h1v1h-1zM5 32h1v1h-1zM6 32h1v1h-1zM13 32h1v1h-1zM20 32h1v1h-1zM22 32h1v1h-1zM24 32h1v1h-1zM27 32h1v1h-1zM29 32h1v1h-1zM30 32h1v1h-1zM31 32h1v1h-1zM32 32h1v1h-1zM33 32h1v1h-1zM34 32h1v1h-1zM35 32h1v1h-1zM36 32h1v1h-1zM39 32h1v1h-1zM8 33h1v1h-1zM9 33h1v1h-1zM13 33h1v1h-1zM15 33h1v1h-1zM16 33h1v1h-1zM17 33h1v1h-1zM18 33h1v1h-1zM20 33h1v1h-1zM23 33h1v1h-1zM26 33h1v1h-1zM27 33h1v1h-1zM28 33h1v1h-1zM29 33h1v1h-1zM30 33h1v1h-1zM32 33h1v1h-1zM36 33h1v1h-1zM38 33h1v1h-1zM39 33h1v1h-1zM40 33h1v1h-1zM0 34h1v1h-1zM1 34h1v1h-1zM2 34h1v1h-1zM3 34h1v1h-1zM4 34h1v1h-1zM5 34h1v1h-1zM6 34h1v1h-1zM8 34h1v1h-1zM10 34h1v1h-1zM12 34h1v1h-1zM15 34h1v1h-1zM16 34h1v1h-1zM18 34h1v1h-1zM20 34h1v1h-1zM21 34h1v1h-1zM22 34h1v1h-1zM23 34h1v1h-1zM25 34h1v1h-1zM26 34h1v1h-1zM27 34h1v1h-1zM31 34h1v1h-1zM32 34h1v1h-1zM34 34h1v1h-1zM36 34h1v1h-1zM37 34h1v1h-1zM40 34h1v1h-1zM0 35h1v1h-1zM6 35h1v1h-1zM10 35h1v1h-1zM11 35h1v1h-1zM13 35h1v1h-1zM14 35h1v1h-1zM15 35h1v1h-1zM16 35h1v1h-1zM20 35h1v1h-1zM21 35h1v1h-1zM23 35h1v1h-1zM24 35h1v1h-1zM25 35h1v1h-1zM29 35h1v1h-1zM30 35h1v1h-1zM31 35h1v1h-1zM32 35h1v1h-1zM36 35h1v1h-1zM37 35h1v1h-1zM0 36h1v1h-1zM2 36h1v1h-1zM3 36h1v1h-1zM4 36h1v1h-1zM6 36h1v1h-1zM8 36h1v1h-1zM9 36h1v1h-1zM12 36h1v1h-1zM16 36h1v1h-1zM20 36h1v1h-1zM23 36h1v1h-1zM24 36h1v1h-1zM25 36h1v1h-1zM27 36h1v1h-1zM30 36h1v1h-1zM31 36h1v1h-1zM32 36h1v1h-1zM33 36h1v1h-1zM34 36h1v1h-1zM35 36h1v1h-1zM36 36h1v1h-1zM0 37h1v1h-1zM2 37h1v1h-1zM3 37h1v1h-1zM4 37h1v1h-1zM6 37h1v1h-1zM10 37h1v1h-1zM11 37h1v1h-1zM14 37h1v1h-1zM16 37h1v1h-1zM18 37h1v1h-1zM20 37h1v1h-1zM22 37h1v1h-1zM23 37h1v1h-1zM24 37h1v1h-1zM25 37h1v1h-1zM26 37h1v1h-1zM27 37h1v1h-1zM28 37h1v1h-1zM30 37h1v1h-1zM32 37h1v1h-1zM35 37h1v1h-1zM38 37h1v1h-1zM39 37h1v1h-1zM0 38h1v1h-1zM2 38h1v1h-1zM3 38h1v1h-1zM4 38h1v1h-1zM6 38h1v1h-1zM9 38h1v1h-1zM10 38h1v1h-1zM12 38h1v1h-1zM14 38h1v1h-1zM16 38h1v1h-1zM17 38h1v1h-1zM18 38h1v1h-1zM21 38h1v1h-1zM23 38h1v1h-1zM24 38h1v1h-1zM25 38h1v1h-1zM27 38h1v1h-1zM29 38h1v1h-1zM30 38h1v1h-1zM33 38h1v1h-1zM37 38h1v1h-1zM40 38h1v1h-1zM0 39h1v1h-1zM6 39h1v1h-1zM9 39h1v1h-1zM15 39h1v1h-1zM21 39h1v1h-1zM22 39h1v1h-1zM23 39h1v1h-1zM24 39h1v1h-1zM26 39h1v1h-1zM27 39h1v1h-1zM28 39h1v1h-1zM29 39h1v1h-1zM32 39h1v1h-1zM35 39h1v1h-1zM37 39h1v1h-1zM39 39h1v1h-1zM40 39h1v1h-1zM0 40h1v1h-1zM1 40h1v1h-1zM2 40h1v1h-1zM3 40h1v1h-1zM4 40h1v1h-1zM5 40h1v1h-1zM6 40h1v1h-1zM8 40h1v1h-1zM10 40h1v1h-1zM11 40h1v1h-1zM15 40h1v1h-1zM16 40h1v1h-1zM17 40h1v1h-1zM21 40h1v1h-1zM22 40h1v1h-1zM23 40h1v1h-1zM24 40h1v1h-1zM29 40h1v1h-1zM32 40h1v1h-1zM35 40h1v1h-1zM36 40h1v1h-1zM37 40h1v1h-1zM39 40h1v1h-1z" fill="#0b1a2c"/></svg>
+            <div><b>On a computer?</b><span>Scan with your phone to download for Android.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="careers">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Careers</span>
+        <h2>Build with us.</h2>
+        <p class="lede">Everyone on the team writes software and deploys it, so every role here includes shipping to AWS. Remote from anywhere in the world, or hybrid from our Padova office. Pick a role and send your application below.</p>
+      </div>
+      <div class="jobs-layout">
+        <div id="jobList"></div>
+        <div class="panel">
+          <h3 id="applyTitle">Apply</h3>
+          <p class="sub" id="applySub">Choose a role on the left, or send an open application.</p>
+          <form id="applyForm" novalidate>
+            <input type="text" id="a_website" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
+            <label>Position
+              <select id="a_role" required></select>
+            </label>
+            <div class="row">
+              <label>Full name<input id="a_name" required autocomplete="name"></label>
+              <label>Email<input id="a_email" type="email" required autocomplete="email"></label>
+            </div>
+            <div class="row">
+              <label>Phone / WhatsApp<input id="a_phone" type="tel" autocomplete="tel"></label>
+              <label>Location<input id="a_loc" placeholder="City, country"></label>
+            </div>
+            <div class="cvdrop">
+              <label for="a_file">CV (PDF, max 10 MB)</label>
+              <label class="filebox" for="a_file">
+                <input id="a_file" type="file" accept="application/pdf,.pdf">
+                <span class="fb-ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 17v-6m-3 3 3-3 3 3"/></svg></span>
+                <span class="fb-txt" id="a_fileName">Choose your CV (PDF)</span>
+                <button type="button" class="fb-clear" id="a_fileClear" hidden aria-label="Remove file">✕</button>
+              </label>
+            </div>
+            <label>LinkedIn or portfolio link <span class="opt">(optional)</span><input id="a_cv" type="url" placeholder="https://"></label>
+            <label>Why this role?<textarea id="a_msg" placeholder="Tell us about a project you are proud of."></textarea></label>
+            <button class="btn btn-primary" type="submit">Submit application</button>
+            <div id="applyOut" hidden></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="book">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Appointments</span>
+        <h2>Book a consultation.</h2>
+        <p class="lede">Pick a day and time. Times are shown in your own time zone, with Italy time alongside. We confirm by email or WhatsApp within one working day.</p>
+      </div>
+      <div class="book-layout">
+        <div>
+          <div class="cal" id="cal">
+            <div class="cal-head">
+              <button type="button" class="cal-nav" id="calPrev" aria-label="Previous month">‹</button>
+              <b id="calTitle" aria-live="polite"></b>
+              <button type="button" class="cal-nav" id="calNext" aria-label="Next month">›</button>
+            </div>
+            <div class="cal-grid" id="calGrid" role="group" aria-label="Choose a day"></div>
+            <div class="cal-legend"><span><i style="background:var(--cyan)"></i>Selected</span><span><i style="background:var(--navy);border:1px solid var(--line)"></i>Available (Mon–Fri)</span><span><i style="background:var(--warn);border-radius:50%"></i>Today</span></div>
+          </div>
+          <div class="slots-title" id="slotsTitle"></div>
+          <div class="slots" id="slots" role="group" aria-label="Choose a time"></div>
+          <p class="picked" id="picked">No time selected yet.</p>
+        </div>
+        <div class="panel">
+          <h3>Your details</h3>
+          <p class="sub">30-minute session · video call or WhatsApp from anywhere, or in person in Padova.</p>
+          <form id="bookForm" novalidate>
+            <input type="text" id="b_website" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
+            <label>Service
+              <select id="b_service">
+                <option>AWS Cloud Assessment (free)</option>
+                <option>Cloud Readiness Review</option>
+                <option>Migration Sprint</option>
+                <option>Cost &amp; Performance Tune-up</option>
+                <option>DevOps &amp; CI/CD</option>
+                <option>Website</option>
+                <option>Web or Mobile App</option>
+                <option>Custom Software</option>
+                <option>Automation</option>
+                <option>AI Enhancement</option>
+              </select>
+            </label>
+            <div class="row">
+              <label>Full name<input id="b_name" required autocomplete="name"></label>
+              <label>Company<input id="b_company" autocomplete="organization"></label>
+            </div>
+            <div class="row">
+              <label>Email<input id="b_email" type="email" required autocomplete="email"></label>
+              <label>Phone / WhatsApp<input id="b_phone" type="tel" autocomplete="tel"></label>
+            </div>
+            <label>Meeting type
+              <select id="b_mode"><option>Video call</option><option>WhatsApp call</option><option>In person (Padova)</option></select>
+            </label>
+            <label>What would you like to discuss?<textarea id="b_msg"></textarea></label>
+            <button class="btn btn-primary" type="submit">Request appointment</button>
+            <div id="bookOut" hidden></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="inbox" hidden>
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Owner view · only you see this</span>
+        <h2>Inbox</h2>
+        <p class="lede">Applications and appointment requests submitted through this page.</p>
+      </div>
+      <div class="inbox-tabs" role="tablist">
+        <button class="tabbtn" role="tab" aria-selected="true" data-tab="bookings">Bookings <span id="cntB">0</span></button>
+        <button class="tabbtn" role="tab" aria-selected="false" data-tab="applications">Applications <span id="cntA">0</span></button>
+      </div>
+      <div class="entries" id="entries"><div class="empty">Requests will appear here as people submit them.</div></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Contact</span>
+        <h2>Talk to us directly.</h2>
+      </div>
+      <div class="contact-grid">
+        <div class="ct"><span class="eyebrow">WhatsApp</span><b id="ctWa">+39 329 797 9359</b><div><a class="btn btn-ghost btn-sm" href="https://wa.me/393297979359" target="_blank" rel="noopener">Open WhatsApp</a> <button class="btn btn-ghost btn-sm" data-copy="+39 329 797 9359">Copy</button></div></div>
+        <div class="ct"><span class="eyebrow">Email</span><b>stedrieln@gmail.com</b><div><button class="btn btn-ghost btn-sm" data-copy="stedrieln@gmail.com">Copy</button></div></div>
+        <div class="ct"><span class="eyebrow">Office</span><b>Vigonovo · Padova</b><p class="note">Veneto, Italy · headquarters. Serving clients worldwide, remotely.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 M TECH INC · NSM Software Development</span>
+    <span>Build. Automate. Scale.</span>
+  </div>
+</footer>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+/* ===== Backend API =====
+   After deploying the backend (see backend/README.md), paste the ApiUrl output into API_BASE_LIVE, e.g.
+   const API_BASE_LIVE = "https://abc123.execute-api.eu-south-1.amazonaws.com";
+   Leave it empty and the forms send requests through WhatsApp instead. */
+const API_BASE_LIVE = "";
+/* Local dev mode (npm run dev in backend/src) uses the local backend automatically. */
+const API_BASE = location.port === "5599" ? location.origin + "/api" : API_BASE_LIVE;
+const WA = "393297979359";
+/* ===== M TECH Remote downloads (Android APK + iPhone web app) =====
+   Android: upload the APK as a GitHub Release asset named exactly M-TECH-Remote.apk
+   in github.com/ndumbestedrielnmbuaaws/M-TECH (Releases → Draft a new release).
+   iPhone: paste the App Store or TestFlight link here when it exists; until then the button shows "Coming soon". */
+const REMOTE_ANDROID_URL = "https://github.com/ndumbestedrielnmbuaaws/M-TECH-STUDIO-DOWNLOAD/releases/latest/download/M-TECH-Remote.apk";
+const REMOTE_IOS_URL = "";
+/* iPhone works today as a web app: the M TECH relay serves it at its own address (e.g. https://relay.yourdomain.com).
+   Put that address here; the iPhone button then opens it in Safari. Add to Home Screen makes it look like an app. */
+const REMOTE_WEB_URL = "";
+
+/* ===== Language (EN / IT) =====
+   Static text is translated by exact match from I18N_IT; messages built in code use L(en, it).
+   Open the site with ?lang=it to start in Italian (the Italian poster's QR code does this). */
+const I18N_IT = {
+"Menu": "Menu",
+"Services": "Servizi",
+"AWS Consulting": "Consulenza AWS",
+"Careers": "Lavora con noi",
+"Book": "Prenota",
+"Contact": "Contatti",
+"Inbox": "Inbox",
+"AWS Cloud · Software · Deployment · AI & Automation": "Cloud AWS · Software · Deployment · IA e automazione",
+"Build.": "Crea.",
+"Automate.": "Automatizza.",
+"Scale.": "Cresci.",
+"We write the software and we deploy it. Websites, apps, custom software, automation and AI features, shipped to AWS and kept running, for clients all over the world, by a team led by a certified AWS Solutions Architect. Headquartered in Padova, Italy.": "Scriviamo il software e lo mettiamo online. Siti web, app, software su misura, automazione e funzioni di IA, pubblicati su AWS e mantenuti attivi, per clienti in tutto il mondo, da un team guidato da un Solutions Architect certificato AWS. Sede a Padova.",
+"Book a consultation": "Prenota una consulenza",
+"Free AWS cloud assessment": "Analisi cloud AWS gratuita",
+"AWS Certified Solutions Architect – Associate": "Certificazione AWS Solutions Architect – Associate",
+"Clients worldwide · remote-first": "Clienti in tutto il mondo · da remoto",
+"Broadcast & telecom delivery": "Progetti broadcast e telecomunicazioni",
+"What we do": "Cosa facciamo",
+"Software, deployment and AI, one team.": "Software, deployment e IA, un solo team.",
+"Every engineer here builds and deploys. The people who write your code also put it into production and keep it healthy, so nothing gets lost in a hand-over.": "Ogni ingegnere del team sviluppa e pubblica. Chi scrive il tuo codice lo porta anche in produzione e lo mantiene, così nulla si perde nei passaggi di consegne.",
+"Cloud & DevOps": "Cloud e DevOps",
+"Cloud Migration": "Migrazione al cloud",
+"Move servers, databases and apps to AWS with a tested cut-over plan and no surprise downtime.": "Spostiamo server, database e applicazioni su AWS con un piano di passaggio collaudato e senza interruzioni a sorpresa.",
+"Solutions Architecture": "Architettura delle soluzioni",
+"Well-Architected designs for availability, security and cost, documented so your team can own them.": "Progetti Well-Architected per disponibilità, sicurezza e costi, documentati perché il tuo team possa gestirli.",
+"DevOps & CI/CD": "DevOps e CI/CD",
+"Pipelines with GitHub Actions or CodePipeline: build, test and deploy on every merge.": "Pipeline con GitHub Actions o CodePipeline: build, test e deploy a ogni merge.",
+"Containers & IaC": "Container e IaC",
+"Docker, ECS, EKS and Terraform or CloudFormation, so every environment is reproducible.": "Docker, ECS, EKS e Terraform o CloudFormation, perché ogni ambiente sia riproducibile.",
+"Software Development": "Sviluppo software",
+"Websites": "Siti web",
+"Fast, responsive company sites hosted on S3 and CloudFront, ready for search and mobile.": "Siti aziendali veloci e responsive su S3 e CloudFront, pronti per i motori di ricerca e per il mobile.",
+"Web Apps": "Applicazioni web",
+"Dashboards, portals and SaaS products built with React, Next.js, Node and Python.": "Dashboard, portali e prodotti SaaS sviluppati con React, Next.js, Node e Python.",
+"Mobile Apps": "App mobile",
+"iOS and Android apps with secure cloud back ends and payment integrations.": "App iOS e Android con back end cloud sicuri e pagamenti integrati.",
+"Custom Software": "Software su misura",
+"Broadcast tools, banking and loan systems, AI assistants: software shaped to how you work.": "Strumenti per il broadcast, sistemi bancari e per prestiti, assistenti IA: software modellato su come lavori.",
+"Automation & AI": "Automazione e IA",
+"Workflow Automation": "Automazione dei processi",
+"Connect your apps and remove manual steps with AWS Lambda, Step Functions and scheduled jobs.": "Collega le tue app ed elimina i passaggi manuali con AWS Lambda, Step Functions e attività pianificate.",
+"AI Enhancement": "Potenziamento con IA",
+"Add AI to software you already have: smart search, summaries, translation and assistants, built on Amazon Bedrock or OpenAI.": "Aggiungi l'IA al software che hai già: ricerca intelligente, riassunti, traduzioni e assistenti, con Amazon Bedrock o OpenAI.",
+"AI Chat & Phone Assistants": "Assistenti IA per chat e telefono",
+"Multilingual assistants that answer customers on your website, WhatsApp or phone, and send you a summary.": "Assistenti multilingue che rispondono ai clienti sul sito, su WhatsApp o al telefono, e ti inviano un riepilogo.",
+"Document & Data Automation": "Automazione di documenti e dati",
+"Read invoices, forms and reports automatically and feed the data into your systems and dashboards.": "Lettura automatica di fatture, moduli e report, con i dati inviati ai tuoi sistemi e dashboard.",
+"How we deliver": "Come lavoriamo",
+"Every project we build, we deploy.": "Ogni progetto che sviluppiamo, lo mettiamo online.",
+"Build": "Sviluppo",
+"Code in Git, reviewed on every pull request": "Codice in Git, revisionato a ogni pull request",
+"Test": "Test",
+"Automated tests run in the CI pipeline": "Test automatici nella pipeline CI",
+"Deploy": "Deploy",
+"Docker images shipped to AWS with Terraform": "Immagini Docker pubblicate su AWS con Terraform",
+"Run": "Gestione",
+"CloudWatch monitoring, backups and updates": "Monitoraggio CloudWatch, backup e aggiornamenti",
+"Campaign · Autumn 2026": "Promozione · Autunno 2026",
+"AWS Cloud Consulting Group": "AWS Cloud Consulting Group",
+"Your AWS bill and architecture, reviewed by a certified architect.": "La tua spesa e la tua architettura AWS, analizzate da un architetto certificato.",
+"For startups and companies anywhere in the world running on AWS, or planning to. We deploy to the AWS Region closest to your users. We check your workloads against the six Well-Architected pillars and hand you a prioritised action plan.": "Per startup e aziende di tutto il mondo che usano AWS o vogliono iniziare. Pubblichiamo nella Region AWS più vicina ai tuoi utenti. Verifichiamo i tuoi carichi di lavoro sui sei pilastri Well-Architected e ti consegniamo un piano d'azione con le priorità.",
+"Free 30-minute cloud assessment": "Analisi cloud gratuita di 30 minuti",
+"A video call with a walkthrough of your current setup and three concrete improvements you can make this month.": "Una videochiamata in cui esaminiamo la tua configurazione attuale e ti indichiamo tre miglioramenti concreti da fare questo mese.",
+"Claim your assessment": "Richiedi la tua analisi",
+"Phase 1 · Assess": "Fase 1 · Analisi",
+"Cloud Readiness Review": "Verifica di preparazione al cloud",
+"Inventory of servers, apps and data": "Inventario di server, applicazioni e dati",
+"Security and IAM baseline check": "Controllo di base su sicurezza e IAM",
+"Migration strategy per workload (the 7 Rs)": "Strategia di migrazione per ogni carico di lavoro (le 7 R)",
+"Typical duration · 1–2 weeks": "Durata tipica · 1–2 settimane",
+"Book this": "Prenota",
+"Phase 2 · Migrate": "Fase 2 · Migrazione",
+"Migration Sprint": "Sprint di migrazione",
+"Landing zone with multi-account setup": "Landing zone con configurazione multi-account",
+"Infrastructure as Code from day one": "Infrastructure as Code fin dal primo giorno",
+"CI/CD pipeline and rollback plan": "Pipeline CI/CD e piano di rollback",
+"Typical duration · 3–6 weeks": "Durata tipica · 3–6 settimane",
+"Phase 3 · Optimise": "Fase 3 · Ottimizzazione",
+"Cost & Performance Tune-up": "Ottimizzazione di costi e prestazioni",
+"Rightsizing and Savings Plans review": "Dimensionamento corretto e revisione dei Savings Plans",
+"Monitoring with CloudWatch alarms": "Monitoraggio con allarmi CloudWatch",
+"Monthly report on spend and uptime": "Report mensile su spesa e disponibilità",
+"Typical duration · ongoing, monthly": "Durata tipica · continuativa, mensile",
+"Build with us.": "Lavora con noi.",
+"Everyone on the team writes software and deploys it, so every role here includes shipping to AWS. Remote from anywhere in the world, or hybrid from our Padova office. Pick a role and send your application below.": "Nel nostro team tutti scrivono software e lo pubblicano, quindi ogni ruolo include il deploy su AWS. Da remoto da qualsiasi parte del mondo, oppure ibrido dal nostro ufficio di Padova. Scegli un ruolo e invia la tua candidatura qui sotto.",
+"Remote or Padova": "Remoto o Padova",
+"Remote · Worldwide": "Remoto · Tutto il mondo",
+"Internship": "Tirocinio",
+"Help build pipelines and infrastructure for client projects. Linux basics and some AWS experience expected.": "Contribuisci a costruire pipeline e infrastrutture per i progetti dei clienti. Richieste basi di Linux e un po' di esperienza su AWS.",
+"Ship web apps and dashboards end to end, from API design to UI.": "Realizza applicazioni web e dashboard dall'inizio alla fine, dalla progettazione delle API all'interfaccia.",
+"Build iOS and Android apps with secure cloud back ends.": "Sviluppa app iOS e Android con back end cloud sicuri.",
+"Build automations and add AI features to client software, then deploy them to AWS.": "Crea automazioni e aggiungi funzioni di IA al software dei clienti, poi pubblicale su AWS.",
+"Learn AWS on real projects. Ideal for students in IT, engineering or computer science.": "Impara AWS su progetti reali. Ideale per studenti di informatica, ingegneria o IT.",
+"Choose a role on the left, or send an open application.": "Scegli un ruolo a sinistra oppure invia una candidatura spontanea.",
+"Position": "Posizione",
+"Open application": "Candidatura spontanea",
+"Full name": "Nome e cognome",
+"Email": "Email",
+"Phone / WhatsApp": "Telefono / WhatsApp",
+"Location": "Città",
+"CV (PDF, max 10 MB)": "CV (PDF, max 10 MB)",
+"Choose your CV (PDF)": "Scegli il tuo CV (PDF)",
+"LinkedIn or portfolio link": "Link LinkedIn o portfolio",
+"(optional)": "(facoltativo)",
+"Why this role?": "Perché questo ruolo?",
+"Submit application": "Invia candidatura",
+"Appointments": "Appuntamenti",
+"Book a consultation.": "Prenota una consulenza.",
+"Pick a day and time. Times are shown in your own time zone, with Italy time alongside. We confirm by email or WhatsApp within one working day.": "Scegli giorno e ora. Gli orari sono mostrati nel tuo fuso orario, con l'ora italiana accanto. Confermiamo via email o WhatsApp entro un giorno lavorativo.",
+"Mon": "Lun",
+"Tue": "Mar",
+"Wed": "Mer",
+"Thu": "Gio",
+"Fri": "Ven",
+"Sat": "Sab",
+"Sun": "Dom",
+"Selected": "Selezionato",
+"Available (Mon–Fri)": "Disponibile (lun–ven)",
+"Today": "Oggi",
+"No time selected yet.": "Nessun orario selezionato.",
+"Selected:": "Selezionato:",
+"Your details": "I tuoi dati",
+"30-minute session · video call or WhatsApp from anywhere, or in person in Padova.": "Sessione di 30 minuti · videochiamata o WhatsApp da ovunque, oppure di persona a Padova.",
+"Service": "Servizio",
+"AWS Cloud Assessment (free)": "Analisi cloud AWS (gratuita)",
+"Website": "Sito web",
+"Web or Mobile App": "App web o mobile",
+"Automation": "Automazione",
+"Company": "Azienda",
+"Meeting type": "Tipo di incontro",
+"Video call": "Videochiamata",
+"WhatsApp call": "Chiamata WhatsApp",
+"In person (Padova)": "Di persona (Padova)",
+"What would you like to discuss?": "Di cosa vorresti parlare?",
+"Request appointment": "Richiedi appuntamento",
+"Talk to us directly.": "Parla direttamente con noi.",
+"Open WhatsApp": "Apri WhatsApp",
+"Copy": "Copia",
+"Office": "Sede",
+"Veneto, Italy · headquarters. Serving clients worldwide, remotely.": "Veneto, Italia · sede principale. Seguiamo clienti in tutto il mondo, da remoto.",
+"Build. Automate. Scale.": "Crea. Automatizza. Cresci.",
+"Send via WhatsApp": "Invia su WhatsApp",
+"Copy details": "Copia i dettagli",
+"Send CV and details": "Invia CV e dettagli",
+"Copy email address": "Copia indirizzo email",
+"Uploading CV…": "Caricamento CV…",
+"Sending…": "Invio in corso…",
+"Copied": "Copiato",
+"Select the text and copy it manually": "Seleziona il testo e copialo a mano",
+"Sharing failed. Use WhatsApp or email instead.": "Condivisione non riuscita. Usa WhatsApp o l'email.",
+"Your CV must be a PDF file. Save it as PDF and choose it again.": "Il CV deve essere un file PDF. Salvalo come PDF e selezionalo di nuovo.",
+"Your PDF is larger than 10 MB. Compress it or export a smaller version and try again.": "Il PDF supera i 10 MB. Comprimilo o esporta una versione più leggera e riprova.",
+"Enter a valid email address, for example name@company.com.": "Inserisci un indirizzo email valido, ad esempio nome@azienda.it.",
+"Add your CV as a PDF, or paste a LinkedIn or portfolio link.": "Allega il CV in PDF oppure incolla un link LinkedIn o portfolio.",
+"Choose a day and a time on the calendar first.": "Scegli prima un giorno e un orario nel calendario.",
+"We could not upload your CV. Check it is a PDF under 10 MB and try again.": "Non siamo riusciti a caricare il CV. Verifica che sia un PDF sotto i 10 MB e riprova.",
+"City, country": "Città, paese",
+"Tell us about a project you are proud of.": "Raccontaci un progetto di cui sei orgoglioso.",
+"Remove file": "Rimuovi file",
+"Previous month": "Mese precedente",
+"Next month": "Mese successivo",
+"Choose a day": "Scegli un giorno",
+"Choose a time": "Scegli un orario",
+"How every project is delivered": "Come realizziamo ogni progetto",
+"Language": "Lingua",
+"App": "App",
+"Mobile app · M-TECH STUDIO": "App mobile · M-TECH STUDIO",
+"Control M-TECH STUDIO from your phone, from anywhere in the world. See the Program screen live and run your show without touching the computer.": "Controlla M-TECH STUDIO dal telefono, da qualsiasi parte del mondo. Guarda lo schermo Program in diretta e gestisci il tuo evento senza toccare il computer.",
+"All studio controls": "Tutti i comandi dello studio",
+" on your phone: inputs, cut and transitions, audio and recording.": " sul telefono: ingressi, stacchi e transizioni, audio e registrazione.",
+"on your phone: inputs, cut and transitions, audio and recording.": "sul telefono: ingressi, stacchi e transizioni, audio e registrazione.",
+"Live Program screen": "Schermo Program in diretta",
+", so you always see what the audience sees.": ", così vedi sempre quello che vede il pubblico.",
+"Connect from anywhere": "Connessione da ovunque",
+", even when the phone and the studio are in different countries.": ", anche se il telefono e lo studio sono in paesi diversi.",
+"Secure pairing": "Abbinamento sicuro",
+" with an ID and password, using Phone Connect in the studio's Settings.": " con ID e password, tramite Phone Connect nelle Impostazioni dello studio.",
+"with an ID and password, using Phone Connect in the studio's Settings.": "con ID e password, tramite Phone Connect nelle Impostazioni dello studio.",
+"Download for": "Scarica per",
+"Software · M-TECH STUDIO": "Software · M-TECH STUDIO",
+"Download M-TECH STUDIO": "Scarica M-TECH STUDIO",
+"Live production for any PC: switch cameras, graphics, audio, recording and streaming, even on a low-spec computer. Free download for Windows, macOS and Linux.": "Produzione live per qualsiasi PC: regia, grafica, audio, registrazione e streaming, anche su computer poco potenti. Download gratuito per Windows, macOS e Linux.",
+"Windows 10 and 11, 64-bit. NDI included.": "Windows 10 e 11, 64 bit. NDI incluso.",
+"Choose your Mac: Apple Silicon (M1 or newer) or Intel.": "Scegli il tuo Mac: Apple Silicon (M1 o successivi) o Intel.",
+"64-bit PCs. NDI included. AppImage runs anywhere; .deb is for Ubuntu and Debian.": "PC a 64 bit. NDI incluso. L'AppImage funziona ovunque; il .deb è per Ubuntu e Debian.",
+"Phone app": "App per telefono",
+"M TECH Remote controls the studio from your phone, anywhere.": "M TECH Remote controlla lo studio dal telefono, da ovunque.",
+"Get it on": "Ottienilo su",
+"All downloads and release notes": "Tutti i download e note di rilascio",
+"Download": "Scarica",
+"Coming soon": "In arrivo",
+"Download on the": "Scarica su",
+"Free download. Works with M-TECH STUDIO on Windows, macOS and Linux.": "Download gratuito. Funziona con M-TECH STUDIO su Windows, macOS e Linux.",
+"Install on Android": "Installazione su Android",
+"Install on iPhone": "Installazione su iPhone",
+"Get it on iPhone": "Ottienilo su iPhone",
+"Phone app only · M TECH Remote": "Solo app per telefono · M TECH Remote",
+"Open in Safari": "Apri in Safari",
+"Tap": "Tocca",
+"on your phone.": "sul telefono.",
+"Open the downloaded file": "Apri il file scaricato",
+"If asked, allow your browser to": "Se richiesto, consenti al browser di",
+"install unknown apps": "installare app sconosciute",
+", then tap": ", poi tocca",
+"Install": "Installa",
+"Open M TECH Remote, then in M-TECH STUDIO go to": "Apri M TECH Remote, poi in M-TECH STUDIO vai su",
+"Settings → Phone Connect": "Impostazioni → Phone Connect",
+"and enter the ID and password shown on your phone.": "e inserisci l'ID e la password mostrati sul telefono.",
+"On a computer?": "Sei al computer?",
+"Scan with your phone to download for Android.": "Inquadra con il telefono per scaricare la versione Android.",
+"Download for Android": "Scarica per Android",
+"Version": "Versione",
+"Download M\u00a0TECH\u00a0Lyrics": "Scarica M\u00a0TECH\u00a0Lyrics",
+"Lyrics and hymns on screen for church services. Search a song online or open your church's hymn book, click a verse and it appears on the projector, the TV or the live stream. Free download for Windows, macOS and Linux, in 8 languages.": "Testi e inni sullo schermo durante le funzioni in chiesa. Cerca un canto online o apri l'innario della tua chiesa, fai clic su una strofa e appare sul proiettore, sulla TV o nella diretta. Download gratuito per Windows, macOS e Linux, in 8 lingue.",
+"If Windows says “Windows protected your PC”, click More info, then Run anyway.": "Se Windows mostra “Windows ha protetto il PC”, fai clic su Ulteriori informazioni, poi su Esegui comunque.",
+"Choose your Mac: Apple Silicon (M1 or newer) or Intel. Needs macOS 13 or newer.": "Scegli il tuo Mac: Apple Silicon (M1 o successivi) o Intel. Serve macOS 13 o successivo.",
+"Open the .zip and drag M TECH Lyrics into Applications. If macOS blocks it the first time, open System Settings → Privacy & Security and click Open Anyway.": "Apri il file .zip e trascina M TECH Lyrics in Applicazioni. Se la prima volta macOS lo blocca, apri Impostazioni di Sistema → Privacy e sicurezza e fai clic su Apri comunque.",
+"Web version": "Versione web",
+"Runs in the browser on any computer, tablet or phone. Nothing to install.": "Funziona nel browser su qualsiasi computer, tablet o telefono. Niente da installare.",
+"In your browser": "Nel tuo browser",
+"Open M TECH Lyrics": "Apri M TECH Lyrics",
+"Download M TECH Lyrics": "Scarica M TECH Lyrics",
+"Open in your browser": "Apri nel browser"
+};
+let LANG=(()=>{try{const q=new URLSearchParams(location.search).get("lang");if(q==="it"||q==="en")return q}catch(e){}
+  try{const v=localStorage.getItem("mtech_lang");if(v==="it"||v==="en")return v}catch(e){}
+  return (navigator.language||"").toLowerCase().startsWith("it")?"it":"en"})();
+const L=(en,it)=>LANG==="it"?it:en;
+const TR_ATTRS=["placeholder","aria-label","title"];
+function trKey(src){const m=/^(\s*)([\s\S]*?)(\s*)$/.exec(src);return LANG==="it"&&Object.prototype.hasOwnProperty.call(I18N_IT,m[2])?m[1]+I18N_IT[m[2]]+m[3]:src}
+function trText(n){if(n.__tr===undefined||n.nodeValue!==n.__tr)n.__en=n.nodeValue;const out=trKey(n.__en);n.__tr=out;if(n.nodeValue!==out)n.nodeValue=out}
+function trAttrs(el){if(!el.hasAttribute)return;el.__ena=el.__ena||{};el.__tra=el.__tra||{};for(const a of TR_ATTRS){if(!el.hasAttribute(a))continue;const v=el.getAttribute(a);if(el.__tra[a]===undefined||v!==el.__tra[a])el.__ena[a]=v;const out=trKey(el.__ena[a]);el.__tra[a]=out;if(v!==out)el.setAttribute(a,out)}}
+function trWalk(root){
+  if(!root)return;
+  if(root.nodeType===3){if(!root.parentElement||!root.parentElement.closest("script,style"))trText(root);return}
+  if(root.nodeType!==1||root.closest("script,style"))return;
+  trAttrs(root);root.querySelectorAll("[placeholder],[aria-label],[title]").forEach(trAttrs);
+  const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;
+  while(n=w.nextNode()){if(!n.parentElement.closest("script,style"))trText(n)}
+}
+
+const JOBS = [
+  {id:"devops", title:"Junior DevOps Engineer", tags:["AWS","Terraform","CI/CD","Remote or Padova"], text:"Help build pipelines and infrastructure for client projects. Linux basics and some AWS experience expected."},
+  {id:"fullstack", title:"Full-Stack Developer", tags:["React","Node.js","PostgreSQL","Remote · Worldwide"], text:"Ship web apps and dashboards end to end, from API design to UI."},
+  {id:"mobile", title:"Mobile App Developer", tags:["React Native","Flutter","Remote · Worldwide"], text:"Build iOS and Android apps with secure cloud back ends."},
+  {id:"ai", title:"AI & Automation Engineer", tags:["Python","LLMs","AWS Bedrock","Remote · Worldwide"], text:"Build automations and add AI features to client software, then deploy them to AWS."},
+  {id:"intern", title:"Cloud Support Intern", tags:["AWS","Internship","Remote or Padova"], text:"Learn AWS on real projects. Ideal for students in IT, engineering or computer science."}
+];
+const SLOT_TIMES = ["09:00","10:00","11:00","14:00","15:00","16:00"];
+const $ = s => document.querySelector(s);
+let db = null, canWrite = true, takenSlots = new Set();
+
+function toast(t){const el=$("#toast");el.textContent=t;el.hidden=false;clearTimeout(toast._t);toast._t=setTimeout(()=>el.hidden=true,2400)}
+async function copyText(t){try{await navigator.clipboard.writeText(t);toast("Copied")}catch(e){toast("Select the text and copy it manually")}}
+document.addEventListener("click",e=>{const c=e.target.closest("[data-copy]");if(c)copyText(c.dataset.copy)});
+
+/* menu */
+$("#menuBtn").addEventListener("click",()=>{const n=$("#mainNav");const o=n.classList.toggle("open");$("#menuBtn").setAttribute("aria-expanded",o)});
+$("#mainNav").addEventListener("click",e=>{if(e.target.tagName==="A"){$("#mainNav").classList.remove("open");$("#menuBtn").setAttribute("aria-expanded","false")}});
+
+/* jobs */
+let selJob = JOBS[0].id;
+function renderJobs(){
+  $("#jobList").innerHTML="";
+  JOBS.forEach(j=>{
+    const b=document.createElement("button");b.type="button";b.className="job";b.setAttribute("aria-pressed",j.id===selJob);
+    b.innerHTML=`<strong></strong><div class="chips"></div><p></p>`;
+    b.querySelector("strong").textContent=j.title;b.querySelector("p").textContent=j.text;
+    j.tags.forEach(t=>{const c=document.createElement("span");c.className="chip";c.textContent=t;b.querySelector(".chips").append(c)});
+    b.onclick=()=>{selJob=j.id;$("#a_role").value=j.title;syncApply();renderJobs()};
+    $("#jobList").append(b);
+  });
+}
+const roleSel=$("#a_role");
+[...JOBS.map(j=>j.title),"Open application"].forEach(t=>{const o=document.createElement("option");o.value=t;o.textContent=t;roleSel.append(o)});
+roleSel.onchange=()=>{const j=JOBS.find(x=>x.title===roleSel.value);selJob=j?j.id:null;syncApply();renderJobs()};
+function syncApply(){$("#applyTitle").textContent=L("Apply · ","Candidatura · ")+(roleSel.value==="Open application"?L("Open application","Candidatura spontanea"):roleSel.value)}
+renderJobs();syncApply();
+
+/* booking calendar */
+let fmtLong,fmtLocal,fmtLocalLong,fmtMonth,fmtDayLong;
+function setFormatters(){const loc=LANG==="it"?"it-IT":"en-GB";
+  fmtLong=new Intl.DateTimeFormat(loc,{weekday:"long",day:"numeric",month:"long",timeZone:"Europe/Rome"});
+  fmtLocal=new Intl.DateTimeFormat(loc,{hour:"2-digit",minute:"2-digit",hourCycle:"h23"});
+  fmtLocalLong=new Intl.DateTimeFormat(loc,{weekday:"short",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit",hourCycle:"h23",timeZoneName:"short"});
+  fmtMonth=new Intl.DateTimeFormat(loc,{month:"long",year:"numeric",timeZone:"UTC"});
+  fmtDayLong=new Intl.DateTimeFormat(loc,{weekday:"long",day:"numeric",month:"long",timeZone:"UTC"});
+}
+setFormatters();
+const isoRome=d=>new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/Rome"}).format(d);
+const userTz=(()=>{try{return Intl.DateTimeFormat().resolvedOptions().timeZone||"Europe/Rome"}catch(e){return "Europe/Rome"}})();
+const sameTz=(()=>{const n=new Date();const f=tz=>new Intl.DateTimeFormat("en-GB",{timeZone:tz,hour:"2-digit",minute:"2-digit",day:"2-digit"}).format(n);try{return f(userTz)===f("Europe/Rome")}catch(e){return true}})();
+/* the real moment a Rome wall-clock slot happens */
+function romeInstant(d,t){const [y,m,dd]=isoRome(d).split("-").map(Number);const [h,mi]=t.split(":").map(Number);
+  let guess=Date.UTC(y,m-1,dd,h,mi);
+  for(let i=0;i<2;i++){const p=Object.fromEntries(new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Rome",hourCycle:"h23",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit"}).formatToParts(new Date(guess)).map(x=>[x.type,x.value]));
+    const asUTC=Date.UTC(+p.year,+p.month-1,+p.day,+p.hour,+p.minute);guess+=Date.UTC(y,m-1,dd,h,mi)-asUTC}
+  return new Date(guess)}
+function whenText(d,t){const base=L(`${fmtLong.format(d)} at ${t} Italy time`,`${fmtLong.format(d)} alle ${t}, ora italiana`);return sameTz?base:base+L(` (${fmtLocalLong.format(romeInstant(d,t))} your time)`,` (${fmtLocalLong.format(romeInstant(d,t))} per te)`)}
+/* calendar (dates are Italy dates; a day is represented at 12:00 UTC so it is the same date everywhere) */
+const BOOK_AHEAD_DAYS=90;
+const dayAt=(y,m,d)=>new Date(Date.UTC(y,m,d,12));
+const todayIso=isoRome(new Date());
+const [ty,tm,td]=todayIso.split("-").map(Number);
+const firstBookable=dayAt(ty,tm-1,td+1), lastBookable=dayAt(ty,tm-1,td+BOOK_AHEAD_DAYS);
+const isWeekday=d=>{const w=d.getUTCDay();return w!==0&&w!==6};
+function isFull(d){return SLOT_TIMES.every(t=>takenSlots.has(slotId(d,t)))}
+function bookable(d){return d>=firstBookable&&d<=lastBookable&&isWeekday(d)&&!isFull(d)}
+let selDay=(()=>{let d=firstBookable;while(!isWeekday(d))d=dayAt(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate()+1);return d})();
+let selTime=null, viewY=selDay.getUTCFullYear(), viewM=selDay.getUTCMonth();
+function slotId(d,t){return isoRome(d)+"_"+t.replace(":","")}
+function renderDays(){
+  {const mt=fmtMonth.format(dayAt(viewY,viewM,1));$("#calTitle").textContent=mt.charAt(0).toUpperCase()+mt.slice(1);}
+  $("#calPrev").disabled=dayAt(viewY,viewM,0)<firstBookable;
+  $("#calNext").disabled=dayAt(viewY,viewM+1,1)>lastBookable;
+  const g=$("#calGrid");g.innerHTML="";
+  ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"].forEach(w=>{const e=document.createElement("div");e.className="cal-wd";e.textContent=w;g.append(e)});
+  const lead=(dayAt(viewY,viewM,1).getUTCDay()+6)%7, count=dayAt(viewY,viewM+1,0).getUTCDate();
+  for(let i=0;i<lead;i++){const e=document.createElement("div");e.className="cal-blank";g.append(e)}
+  for(let n=1;n<=count;n++){
+    const d=dayAt(viewY,viewM,n), iso=isoRome(d);
+    const b=document.createElement("button");b.type="button";b.className="cal-day"+(iso===todayIso?" today":"");b.textContent=n;
+    const ok=bookable(d);b.disabled=!ok;
+    b.setAttribute("aria-label",fmtDayLong.format(d)+(ok?"":(isFull(d)&&isWeekday(d)?L(", fully booked",", al completo"):L(", unavailable",", non disponibile"))));
+    b.setAttribute("aria-pressed",iso===isoRome(selDay));
+    b.onclick=()=>{selDay=d;selTime=null;renderDays();renderSlots()};
+    g.append(b);
+  }
+}
+async function api(path,opts={}){
+  const r=await fetch(API_BASE.replace(/\/$/,"")+path,{method:opts.method||"GET",headers:opts.body?{"content-type":"application/json"}:{},body:opts.body?JSON.stringify(opts.body):undefined});
+  let b={};try{b=await r.json()}catch(e){}
+  if(!r.ok){const err=new Error(b.error||("Request failed ("+r.status+")"));err.status=r.status;throw err}
+  return b;
+}
+const loadedMonths=new Set();
+async function loadSlots(y,m,force){
+  if(!API_BASE)return;
+  const key=`${y}-${String(m+1).padStart(2,"0")}`;
+  if(loadedMonths.has(key)&&!force)return;
+  loadedMonths.add(key);
+  try{const b=await api("/slots?month="+key);(b.taken||[]).forEach(id=>takenSlots.add(id));
+    if(selTime&&takenSlots.has(slotId(selDay,selTime)))selTime=null;renderDays();renderSlots()}
+  catch(e){loadedMonths.delete(key)}
+}
+$("#calPrev").onclick=()=>{viewM--;if(viewM<0){viewM=11;viewY--}renderDays();loadSlots(viewY,viewM)};
+$("#calNext").onclick=()=>{viewM++;if(viewM>11){viewM=0;viewY++}renderDays();loadSlots(viewY,viewM)};
+function renderSlots(){
+  const box=$("#slots");box.innerHTML="";
+  SLOT_TIMES.forEach(t=>{const b=document.createElement("button");b.type="button";b.className="slot";b.textContent=sameTz?t:fmtLocal.format(romeInstant(selDay,t));b.title=t+" Italy time";
+    const taken=takenSlots.has(slotId(selDay,t));b.disabled=taken;if(taken)b.setAttribute("aria-label",t+" booked");
+    b.setAttribute("aria-pressed",t===selTime);b.onclick=()=>{selTime=t;renderSlots()};box.append(b)});
+  $("#slotsTitle").textContent=L("Times on ","Orari di ")+fmtDayLong.format(selDay)+(sameTz?"":L(" · shown in your time"," · nel tuo fuso orario"));
+  $("#picked").innerHTML=selTime?`Selected: <b></b>`:"No time selected yet.";
+  if(selTime)$("#picked b").textContent=whenText(selDay,selTime);
+}
+renderDays();renderSlots();loadSlots(viewY,viewM);
+document.querySelectorAll("[data-book]").forEach(b=>b.addEventListener("click",()=>{$("#b_service").value=b.dataset.book;document.getElementById("book").scrollIntoView();setTimeout(()=>$("#b_name").focus({preventScroll:true}),400)}));
+
+/* submission helpers */
+function waLink(text){return "https://wa.me/"+WA+"?text="+encodeURIComponent(text)}
+function showOut(el,kind,html,text){
+  el.hidden=false;el.className="msg "+kind;el.innerHTML=html;
+  if(text){const acts=document.createElement("div");acts.className="acts";
+    const a=document.createElement("a");a.className="btn btn-primary btn-sm";a.href=waLink(text);a.target="_blank";a.rel="noopener";a.textContent="Send via WhatsApp";
+    const c=document.createElement("button");c.type="button";c.className="btn btn-ghost btn-sm";c.textContent="Copy details";c.onclick=()=>copyText(text);
+    acts.append(a,c);el.append(acts)}
+}
+function need(ids){for(const id of ids){const el=document.getElementById(id);if(!el.value.trim()){el.focus();return false}}return true}
+const emailOk=v=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+
+let uid=null;
+/* each submitter keeps their own requests in one private doc (col/<their id>); only the owner can read across them */
+async function save(col,id,data){
+  if(!db||!canWrite||!uid)return false;
+  try{
+    const ref=db.doc(col+"/"+uid);const snap=await ref.get();
+    const items=snap.exists?[...(snap.data().items||[])]:[];
+    items.push({id,...data});await ref.set({items});return true;
+  }catch(e){if(e&&e.code==="invalid_argument")canWrite=false;return false}
+}
+async function saveSlot(sid){if(!db||!canWrite)return;try{await db.collection("slots").doc(sid).set({taken:true})}catch(e){}}
+
+/* CV file */
+let cvFile=null;
+const fileIn=$("#a_file"), fileName=$("#a_fileName"), fileClear=$("#a_fileClear");
+function setCv(f){
+  cvFile=f||null;const box=fileIn.closest(".filebox");
+  if(cvFile){fileName.textContent=`${cvFile.name} · ${(cvFile.size/1048576).toFixed(1)} MB`;box.classList.add("has");fileClear.hidden=false}
+  else{fileName.textContent="Choose your CV (PDF)";box.classList.remove("has");fileClear.hidden=true;fileIn.value=""}
+}
+fileIn.addEventListener("change",()=>{
+  const f=fileIn.files&&fileIn.files[0];const out=$("#applyOut");
+  if(!f){setCv(null);return}
+  const isPdf=f.type==="application/pdf"||/\.pdf$/i.test(f.name);
+  if(!isPdf){setCv(null);showOut(out,"alt","Your CV must be a PDF file. Save it as PDF and choose it again.");return}
+  if(f.size>10*1048576){setCv(null);showOut(out,"alt","Your PDF is larger than 10 MB. Compress it or export a smaller version and try again.");return}
+  out.hidden=true;setCv(f);
+});
+fileClear.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();setCv(null)});
+
+function canShareFile(f){try{return !!(f&&navigator.canShare&&navigator.share&&navigator.canShare({files:[f]}))}catch(e){return false}}
+
+function showCvStep(out,saved,text,d){
+  out.hidden=false;out.className="msg "+(saved?"ok":"alt");out.innerHTML="";
+  const p=document.createElement("div");
+  const shareable=canShareFile(cvFile);
+  p.innerHTML=(saved?L("<b>Details received.</b> ","<b>Dati ricevuti.</b> "):L("<b>One last step:</b> ","<b>Ultimo passaggio:</b> "))+(shareable
+    ?L("Tap the button below and choose <b>WhatsApp</b> (or your email app) to send us your CV with your details.","Tocca il pulsante qui sotto e scegli <b>WhatsApp</b> (o la tua app email) per inviarci il CV con i tuoi dati.")
+    :L("Open WhatsApp below and attach your PDF in the chat (tap the paperclip), or email it to <b>stedrieln@gmail.com</b>.","Apri WhatsApp qui sotto e allega il PDF nella chat (tocca la graffetta), oppure invialo a <b>stedrieln@gmail.com</b>."));
+  out.append(p);
+  const acts=document.createElement("div");acts.className="acts";
+  if(shareable){
+    const b=document.createElement("button");b.type="button";b.className="btn btn-primary btn-sm";b.textContent="Send CV and details";
+    b.onclick=async()=>{try{await navigator.share({files:[cvFile],title:"Job application – "+d.role,text});
+        out.className="msg ok";p.innerHTML=L("<b>Thank you.</b> We will reply to "+escapeHtml(d.email)+" within a few working days.","<b>Grazie.</b> Ti risponderemo a "+escapeHtml(d.email)+" entro pochi giorni lavorativi.");acts.remove();$("#applyForm").reset();setCv(null);roleSel.value=d.role}
+      catch(err){if(err&&err.name==="AbortError")return;toast("Sharing failed. Use WhatsApp or email instead.")}};
+    acts.append(b);
+  }
+  const a=document.createElement("a");a.className="btn "+(shareable?"btn-ghost":"btn-primary")+" btn-sm";a.target="_blank";a.rel="noopener";
+  a.href=waLink(text+L("\n\n(I will attach my CV PDF here: ","\n\n(Allego qui il mio CV in PDF: ")+cvFile.name+")");a.textContent="Open WhatsApp";
+  const c=document.createElement("button");c.type="button";c.className="btn btn-ghost btn-sm";c.textContent="Copy email address";c.onclick=()=>copyText("stedrieln@gmail.com");
+  acts.append(a,c);out.append(acts);
+}
+
+$("#applyForm").addEventListener("submit",async e=>{
+  e.preventDefault();const out=$("#applyOut");
+  if(!need(["a_name","a_email"]))return;
+  if(!emailOk($("#a_email").value)){$("#a_email").focus();showOut(out,"alt","Enter a valid email address, for example name@company.com.");return}
+  if(!cvFile&&!$("#a_cv").value.trim()){fileIn.closest(".filebox").focus?.();showOut(out,"alt","Add your CV as a PDF, or paste a LinkedIn or portfolio link.");return}
+  const d={role:roleSel.value,name:$("#a_name").value.trim(),email:$("#a_email").value.trim(),phone:$("#a_phone").value.trim(),location:$("#a_loc").value.trim(),cv:$("#a_cv").value.trim(),cvFile:cvFile?cvFile.name:"",message:$("#a_msg").value.trim(),createdAt:new Date().toISOString(),status:"new"};
+  const text=`Job application – M TECH INC\nPosition: ${d.role}\nName: ${d.name}\nEmail: ${d.email}\nPhone: ${d.phone}\nLocation: ${d.location}`+(d.cv?`\nLinkedIn/portfolio: ${d.cv}`:"")+(d.cvFile?`\nCV: ${d.cvFile} (PDF attached)`:"")+`\n\n${d.message}`;
+  const btn=e.submitter;btn.disabled=true;
+  if(API_BASE){
+    const label=btn.textContent;
+    try{
+      let uploadId="";
+      if(cvFile){
+        btn.textContent="Uploading CV…";
+        const up=await api("/applications/upload-url",{method:"POST",body:{fileName:cvFile.name,size:cvFile.size}});
+        const fd=new FormData();Object.entries(up.fields).forEach(([k,v])=>fd.append(k,v));fd.append("file",cvFile);
+        const r=await fetch(up.url,{method:"POST",body:fd});
+        if(!r.ok)throw Object.assign(new Error("We could not upload your CV. Check it is a PDF under 10 MB and try again."),{status:400});
+        uploadId=up.uploadId;
+      }
+      btn.textContent="Sending…";
+      await api("/applications",{method:"POST",body:{role:d.role,name:d.name,email:d.email,phone:d.phone,location:d.location,link:d.cv,message:d.message,uploadId,cvFileName:d.cvFile,website:$("#a_website").value}});
+      btn.textContent=label;btn.disabled=false;
+      showOut(out,"ok",L("<b>Application received"+(cvFile?", including your CV":"")+".</b> We will reply to "+escapeHtml(d.email)+" within a few working days.","<b>Candidatura ricevuta"+(cvFile?", CV incluso":"")+".</b> Ti risponderemo a "+escapeHtml(d.email)+" entro pochi giorni lavorativi."));
+      e.target.reset();setCv(null);roleSel.value=d.role;return;
+    }catch(err){
+      btn.textContent=label;btn.disabled=false;
+      if(err.status===400){showOut(out,"alt",escapeHtml(err.message));return}
+      /* network or server problem: fall through to WhatsApp/email */
+    }
+    btn.disabled=true;
+  }
+  const ok=await save("applications","a"+Date.now()+Math.random().toString(36).slice(2,6),d);
+  btn.disabled=false;
+  if(cvFile){showCvStep(out,ok,text,d);return}
+  if(ok){showOut(out,"ok",L("<b>Application received.</b> We will reply to "+escapeHtml(d.email)+" within a few working days.","<b>Candidatura ricevuta.</b> Ti risponderemo a "+escapeHtml(d.email)+" entro pochi giorni lavorativi."));e.target.reset();roleSel.value=d.role}
+  else showOut(out,"alt",L("<b>One last step:</b> send your application to us on WhatsApp, or copy it and email it to stedrieln@gmail.com.","<b>Ultimo passaggio:</b> inviaci la candidatura su WhatsApp, oppure copiala e mandala via email a stedrieln@gmail.com."),text);
+});
+
+$("#bookForm").addEventListener("submit",async e=>{
+  e.preventDefault();const out=$("#bookOut");
+  if(!selTime){showOut(out,"alt","Choose a day and a time on the calendar first.");document.getElementById("slots").scrollIntoView({block:"center"});return}
+  if(!need(["b_name","b_email"]))return;
+  if(!emailOk($("#b_email").value)){$("#b_email").focus();showOut(out,"alt","Enter a valid email address, for example name@company.com.");return}
+  const sid=slotId(selDay,selTime), when=whenText(selDay,selTime);
+  const d={service:$("#b_service").value,name:$("#b_name").value.trim(),company:$("#b_company").value.trim(),email:$("#b_email").value.trim(),phone:$("#b_phone").value.trim(),mode:$("#b_mode").value,message:$("#b_msg").value.trim(),date:isoRome(selDay),time:selTime,slot:sid,clientTz:userTz,createdAt:new Date().toISOString(),status:"new"};
+  const text=`Appointment request – M TECH INC\nService: ${d.service}\nWhen: ${when}\nMeeting: ${d.mode}\nName: ${d.name}\nCompany: ${d.company}\nEmail: ${d.email}\nPhone: ${d.phone}\n\n${d.message}`;
+  const btn=e.submitter;btn.disabled=true;
+  if(API_BASE){
+    try{
+      await api("/bookings",{method:"POST",body:{...d,website:$("#b_website").value}});
+      btn.disabled=false;
+      showOut(out,"ok",L(`<b>Booked for ${escapeHtml(when)}.</b> We will confirm by email or WhatsApp within one working day.`,`<b>Prenotato per ${escapeHtml(when)}.</b> Confermeremo via email o WhatsApp entro un giorno lavorativo.`));
+      takenSlots.add(sid);selTime=null;renderDays();renderSlots();e.target.reset();return;
+    }catch(err){
+      btn.disabled=false;
+      if(err.status===409){takenSlots.add(sid);selTime=null;renderDays();renderSlots();loadSlots(viewY,viewM,true);showOut(out,"alt",L("<b>That time was just booked by someone else.</b> Please choose another time.","<b>Questo orario è appena stato prenotato da qualcun altro.</b> Scegli un altro orario."));return}
+      if(err.status===400){showOut(out,"alt",escapeHtml(err.message));return}
+      /* network or server problem: fall through to WhatsApp */
+    }
+    btn.disabled=true;
+  }
+  let ok=await save("bookings","b"+Date.now()+Math.random().toString(36).slice(2,6),d);
+  if(ok)await saveSlot(sid);
+  btn.disabled=false;
+  if(ok){showOut(out,"ok",L(`<b>Request sent for ${escapeHtml(when)}.</b> We will confirm by email or WhatsApp within one working day.`,`<b>Richiesta inviata per ${escapeHtml(when)}.</b> Confermeremo via email o WhatsApp entro un giorno lavorativo.`));takenSlots.add(sid);selTime=null;renderDays();renderSlots();e.target.reset()}
+  else showOut(out,"alt",L(`<b>One last step:</b> send this request for ${escapeHtml(when)} on WhatsApp to confirm it, or copy it and email stedrieln@gmail.com.`,`<b>Ultimo passaggio:</b> invia questa richiesta per ${escapeHtml(when)} su WhatsApp per confermarla, oppure copiala e mandala a stedrieln@gmail.com.`),text);
+});
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+
+/* owner inbox */
+let inboxTab="bookings", data={bookings:[],applications:[]};
+function renderInbox(){
+  $("#cntB").textContent=data.bookings.filter(x=>x.d.status!=="done").length;
+  $("#cntA").textContent=data.applications.filter(x=>x.d.status!=="done").length;
+  const box=$("#entries");box.innerHTML="";const list=data[inboxTab];
+  if(!list.length){box.innerHTML=`<div class="empty">No ${inboxTab} yet. They appear here as soon as someone submits the form.</div>`;return}
+  list.forEach(({docId,id,d})=>{
+    const el=document.createElement("div");el.className="entry"+(d.status==="done"?" done":"");
+    const title=inboxTab==="bookings"?`${d.name}${d.company?" · "+d.company:""}`:d.name;
+    const meta=inboxTab==="bookings"?`${d.service} · ${d.date} ${d.time} Italy · ${d.mode}${d.clientTz?" · client in "+d.clientTz:""}`:`${d.role} · ${d.location||"—"}`;
+    el.innerHTML=`<div class="top"><strong></strong><span class="meta s"></span></div><span class="meta m"></span><span class="meta c"></span><p></p><div class="acts" style="display:flex;gap:8px;flex-wrap:wrap"></div>`;
+    el.querySelector("strong").textContent=title;el.querySelector(".s").textContent=d.status==="done"?"Handled":"New";
+    el.querySelector(".m").textContent=meta;el.querySelector(".c").textContent=[d.email,d.phone,d.cv,d.cvFile?"CV PDF: "+d.cvFile+" (sent by WhatsApp/email)":""].filter(Boolean).join(" · ");
+    el.querySelector("p").textContent=d.message||"";
+    const acts=el.querySelector(".acts");
+    const t=document.createElement("button");t.className="btn btn-ghost btn-sm";t.textContent=d.status==="done"?"Mark as new":"Mark handled";
+    const col=inboxTab;
+    t.onclick=async()=>{t.disabled=true;try{
+      const ref=db.doc(col+"/"+docId);const snap=await ref.get();
+      const items=(snap.data()?.items||[]).map(x=>x.id===id?{...x,status:x.status==="done"?"new":"done"}:x);
+      await ref.set({items});
+    }catch(e){toast("Could not update. Try again.")}t.disabled=false};
+    acts.append(t);
+    if(d.phone){const w=document.createElement("a");w.className="btn btn-ghost btn-sm";w.target="_blank";w.rel="noopener";w.textContent="WhatsApp";w.href="https://wa.me/"+d.phone.replace(/\D/g,"");acts.append(w)}
+    box.append(el);
+  });
+}
+document.querySelectorAll(".tabbtn").forEach(b=>b.onclick=()=>{inboxTab=b.dataset.tab;document.querySelectorAll(".tabbtn").forEach(x=>x.setAttribute("aria-selected",x===b));renderInbox()});
+
+/* M TECH Remote buttons */
+(function(){const a=document.getElementById("dlAndroid");if(a&&REMOTE_ANDROID_URL)a.href=REMOTE_ANDROID_URL;
+  const ha=document.getElementById("heroAndroid");if(ha&&REMOTE_ANDROID_URL){ha.href=REMOTE_ANDROID_URL}
+  const hi=document.getElementById("heroIos");
+  if(hi){const u=REMOTE_IOS_URL||REMOTE_WEB_URL;if(u){hi.href=u;hi.target="_blank";hi.rel="noopener"}}
+  const i=document.getElementById("dlIos");if(!i)return;
+  if(REMOTE_IOS_URL){i.href=REMOTE_IOS_URL;i.target="_blank";document.getElementById("iosLabel").textContent="Download on the";}
+  else if(REMOTE_WEB_URL){i.href=REMOTE_WEB_URL;i.target="_blank";i.rel="noopener";const ad=document.getElementById("iosAddr");if(ad){ad.textContent=REMOTE_WEB_URL;ad.hidden=false}}
+  else{i.addEventListener("click",e=>{e.preventDefault();const s=document.getElementById("iphoneSteps");if(s)s.scrollIntoView({behavior:"smooth",block:"center"})})}
+})();
+/* M-TECH STUDIO downloads: files are GitHub Release assets in ndumbestedrielnmbuaaws/M-TECH-STUDIO-DOWNLOAD. After a new release, change STUDIO_VERSION only. */
+const STUDIO_VERSION = "1.34.0";
+/* The Release tag has no "v". Mac files are in the Release. */
+const MAC_READY = true;
+(function(){const v=STUDIO_VERSION,b="https://github.com/ndumbestedrielnmbuaaws/M-TECH-STUDIO-DOWNLOAD/releases/download/"+v+"/";
+  const m={dlWin:"M-TECH-STUDIO-Setup-"+v+".exe",dlMacArm:"M-TECH-STUDIO-"+v+"-mac-arm64.dmg",dlMacIntel:"M-TECH-STUDIO-"+v+"-mac-x64.dmg",dlLinuxApp:"M-TECH-STUDIO-"+v+"-linux-x86_64.AppImage",dlLinuxDeb:"M-TECH-STUDIO-"+v+"-linux-amd64.deb"};
+  for(const k in m){const e=document.getElementById(k);if(e)e.href=(!MAC_READY&&/Mac/.test(k))?"https://github.com/ndumbestedrielnmbuaaws/M-TECH-STUDIO-DOWNLOAD/releases/latest":b+m[k]}
+  const a=document.getElementById("dlAll");if(a)a.href="https://github.com/ndumbestedrielnmbuaaws/M-TECH-STUDIO-DOWNLOAD/releases/latest";
+  const sv=document.getElementById("studioVer");if(sv)sv.textContent=v;
+  const m2={hWin:"dlWin",hMacArm:"dlMacArm",hMacIntel:"dlMacIntel",hLinuxApp:"dlLinuxApp",hLinuxDeb:"dlLinuxDeb"};for(const k in m2){const e=document.getElementById(k),o=document.getElementById(m2[k]);if(e&&o)e.href=o.href}
+  const an=document.getElementById("dlAndroid2");if(an&&REMOTE_ANDROID_URL){an.href=REMOTE_ANDROID_URL}
+  const io=document.getElementById("dlIos2");if(io){const u=REMOTE_IOS_URL||REMOTE_WEB_URL;if(u){io.href=u;io.target="_blank";io.rel="noopener"}}
+})();
+/* M TECH Lyrics downloads: files are GitHub Release assets in ndumbestedrielnmbuaaws/M-Tech-lyrics, Release tag "v" + version (v000.18).
+   After a new release, change LYRICS_VERSION only (the Linux files are named 0.18.0 for 000.18; the code below works that out). */
+const LYRICS_VERSION = "000.18";
+/* The web version (GitHub Pages of M-Tech-lyrics) */
+const LYRICS_WEB_URL = "https://ndumbestedrielnmbuaaws.github.io/M-Tech-lyrics/";
+(function(){const v=LYRICS_VERSION,r="https://github.com/ndumbestedrielnmbuaaws/M-Tech-lyrics/releases",b=r+"/download/v"+v+"/";
+  const p=v.split(".").map(Number),lx=p[0]+"."+p[1]+".0";
+  const m={lyWin:"M-TECH-Lyrics-Setup-"+v+".exe",lyMacArm:"M-TECH-Lyrics-"+v+"-mac-AppleSilicon.zip",lyMacIntel:"M-TECH-Lyrics-"+v+"-mac-Intel.zip",lyLinuxApp:"M-TECH-Lyrics-"+lx+"-linux-x86_64.AppImage",lyLinuxDeb:"M-TECH-Lyrics-"+lx+"-linux-amd64.deb"};
+  for(const k in m){const e=document.getElementById(k);if(e)e.href=b+m[k]}
+  const a=document.getElementById("lyAll");if(a)a.href=r+"/latest";
+  const w=document.getElementById("lyWeb");if(w)w.href=LYRICS_WEB_URL;
+  const sv=document.getElementById("lyricsVer");if(sv)sv.textContent=v;
+  const h={hlWin:"lyWin",hlMacArm:"lyMacArm",hlMacIntel:"lyMacIntel",hlLinuxApp:"lyLinuxApp",hlLinuxDeb:"lyLinuxDeb",hlWeb:"lyWeb"};for(const k in h){const e=document.getElementById(k),o=document.getElementById(h[k]);if(e&&o)e.href=o.href}
+})();
+/* language: start */
+document.querySelectorAll("select option").forEach(o=>{if(!o.hasAttribute("value"))o.value=o.textContent.trim()});
+function paintLang(){
+  document.documentElement.lang=LANG;
+  document.querySelectorAll(".lang button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lang===LANG)));
+}
+function setLang(l){
+  if(l===LANG)return;LANG=l;try{localStorage.setItem("mtech_lang",l)}catch(e){}
+  setFormatters();trWalk(document.body);
+  renderJobs();syncApply();renderDays();renderSlots();setCv(cvFile);
+  ["#applyOut","#bookOut"].forEach(id=>{const o=$(id);if(o)o.hidden=true});
+  paintLang();
+}
+document.querySelectorAll(".lang button").forEach(b=>b.addEventListener("click",()=>setLang(b.dataset.lang)));
+new MutationObserver(ms=>{for(const m of ms){
+  if(m.type==="characterData")trText(m.target);
+  else if(m.type==="attributes")trAttrs(m.target);
+  else m.addedNodes.forEach(trWalk);
+}}).observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:TR_ATTRS});
+trWalk(document.body);paintLang();
+
+/* runtime */
+(async()=>{
+  if(!window.claude||!claude.use)return;
+  const [dbNs,user]=await Promise.all([claude.use("db"),claude.use("user")]);
+  db=dbNs;if(!db)return;
+  uid=user?await user.id():null;
+  db.collection("slots").onSnapshot(s=>{takenSlots=new Set(s.docs.filter(x=>x.exists).map(x=>x.id));renderDays();renderSlots()},()=>{});
+  const owner=user?(await user.isOwner()||await user.canEdit()):false;
+  if(owner){
+    $("#inbox").hidden=false;$("#navInbox").hidden=false;
+    ["bookings","applications"].forEach(col=>db.collection(col).onSnapshot(s=>{
+      const rows=[];s.docs.forEach(x=>{if(!x.exists)return;(x.data().items||[]).forEach(it=>rows.push({docId:x.id,id:it.id,d:it}))});
+      rows.sort((a,b)=>String(b.d.createdAt).localeCompare(String(a.d.createdAt)));
+      data[col]=rows;renderInbox()},()=>{}));
+  }
+})();
+</script>
+
+</body></html>
